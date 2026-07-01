@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,7 +10,6 @@ import { ParticlesBg } from './components/ParticlesBg';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { Experience } from './components/Experience';
 import { Skills } from './components/Skills';
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
@@ -18,6 +17,22 @@ import { Contact } from './components/Contact';
 function App() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
   const pathRef = useRef<HTMLDivElement | null>(null);
+  
+  // Theme state lifted to App level
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('theme');
+    return (saved as 'light' | 'dark') || 'light';
+  });
+
+  useEffect(() => {
+    // Write theme attributes to HTML
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
 
   useEffect(() => {
     // 1. Initialize Lenis Smooth Scrolling
@@ -137,15 +152,19 @@ function App() {
       {/* Custom Cursor Dot */}
       <div ref={cursorRef} className="custom-cursor" />
 
-      {/* High-quality Canvas Interactive Particles */}
-      <ParticlesBg />
+      {/* High-quality Canvas Interactive Particles - Only rendered in Dark Mode */}
+      {theme === 'dark' && <ParticlesBg />}
 
-      {/* Decorative Blur Orbs */}
-      <div className="glow-orb orb-cyan" />
-      <div className="glow-orb orb-purple" />
+      {/* Decorative Blur Orbs - Only rendered in Dark Mode */}
+      {theme === 'dark' && (
+        <>
+          <div className="glow-orb orb-cyan" />
+          <div className="glow-orb orb-purple" />
+        </>
+      )}
 
       {/* Sticky Header Navbar */}
-      <Navbar />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       {/* Layout Content */}
       <main style={{ position: 'relative', zIndex: 10 }}>
@@ -157,7 +176,6 @@ function App() {
         {/* Sections */}
         <Hero />
         <About />
-        <Experience />
         <Skills />
         <Projects />
         <Contact />

@@ -1,184 +1,271 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ShieldCheck, Zap, ShoppingCart, Award } from 'lucide-react';
-
-gsap.registerPlugin(ScrollTrigger);
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
 export const About: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    const cards = cardRefs.current;
-    
-    // Animate stats cards on scroll
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   const stats = [
     {
-      icon: <Award size={28} color="var(--accent-primary)" />,
+      value: '5+',
+      label: 'Education',
+      desc: 'Certifications & Degrees',
+    },
+    {
       value: '2+ Years',
-      label: 'Professional Experience',
-      desc: 'Developing scalable web apps using React, Next.js, and TypeScript.',
+      label: 'Experience',
+      desc: 'Full Stack Development',
     },
     {
-      icon: <Zap size={28} color="var(--accent-primary)" />,
-      value: '34% Boost',
-      label: 'Performance Speed',
-      desc: 'Implemented dynamic routing, caching, and lazy loading.',
-    },
-    {
-      icon: <ShoppingCart size={28} color="var(--accent-primary)" />,
-      value: '25% Reduction',
-      label: 'Cart Abandonment',
-      desc: 'Revamped checkout screens and product loading components.',
-    },
-    {
-      icon: <ShieldCheck size={28} color="var(--accent-primary)" />,
-      value: '40% Reach',
-      label: 'User Engagement Boost',
-      desc: 'Built custom sliders, video libraries, and promo managers.',
+      value: '10+',
+      label: 'Projects Completed',
+      desc: 'Production Applications',
     },
   ];
 
   return (
     <section
       id="about"
-      ref={containerRef}
       style={{
-        paddingTop: '60px',
-        paddingBottom: '60px',
+        paddingTop: '80px',
+        paddingBottom: '80px',
       }}
       className="section"
     >
-      {/* Title */}
-      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-        <h2 style={{ fontSize: 'clamp(28px, 4vw, 36px)', marginBottom: '12px' }}>
-          About <span className="text-gradient">Myself</span>
-        </h2>
-        <p style={{ color: 'var(--text-muted)', maxWidth: '500px', margin: '0 auto', fontSize: '16px' }}>
-          A brief overview of my professional focus and accomplishments.
-        </p>
-      </div>
-
-      {/* Intro Grid */}
+      {/* Redesigned grid container matching mockup */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1.2fr 1.8fr',
-          gap: '40px',
+          gridTemplateColumns: '1fr 1.2fr',
+          gap: '60px',
           alignItems: 'center',
-          marginBottom: '50px',
         }}
-        className="about-grid-content"
+        className="about-grid"
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', textAlign: 'left' }}>
-          <h3 style={{ fontSize: '22px', lineHeight: 1.3, fontWeight: 800 }}>
-            Clean Code Meets <br />
-            <span style={{ color: 'var(--accent-primary)' }}>Full Stack Architecture</span>
-          </h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '15px', lineHeight: 1.6, marginBottom: '8px' }}>
-            I am a Full Stack Developer with over 2 years of experience building modern web and mobile applications. My expertise includes React.js, Next.js, React Native, TypeScript, Node.js, and MongoDB, enabling me to develop scalable, high-performance solutions across multiple platforms.
-          </p>
-          <p style={{ color: 'var(--text-muted)', fontSize: '15px', lineHeight: 1.6 }}>
-            Currently, I work at Golden Technologies, where I contribute to the development of SaaS products, CRM systems, CMS platforms, and lead management applications. Throughout my career, I have focused on creating intuitive user experiences, optimizing application performance, and delivering reliable, maintainable code.
-          </p>
-        </div>
+        {/* Left Column: 3D Male About Avatar with floating badges */}
         <div
-          className="glass-panel"
           style={{
-            padding: '30px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 'min(440px, 100vw)',
+            width: '100%',
+            position: 'relative',
+          }}
+          className="about-avatar-container"
+        >
+          {/* Main 3D Avatar Image */}
+          <img
+            src="/about_avatar_man.png"
+            alt="Sudeesh Kumar - About 3D Avatar"
+            style={{
+              width: '90%',
+              height: 'auto',
+              objectFit: 'contain',
+              zIndex: 2,
+            }}
+          />
+
+          {/* Floating Badge: React */}
+          <div
+            className="floating-badge react-badge-about"
+            style={{
+              position: 'absolute',
+              top: '15%',
+              left: '5%',
+              background: '#e0f2fe',
+              color: '#0284c7',
+              width: '46px',
+              height: '46px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 10px 15px rgba(2, 132, 199, 0.15)',
+              zIndex: 3,
+              border: '2px solid #ffffff',
+            }}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+              <ellipse cx="12" cy="12" rx="10" ry="3.8" transform="rotate(30 12 12)" />
+              <ellipse cx="12" cy="12" rx="10" ry="3.8" transform="rotate(90 12 12)" />
+              <ellipse cx="12" cy="12" rx="10" ry="3.8" transform="rotate(150 12 12)" />
+              <circle cx="12" cy="12" r="2" fill="currentColor" />
+            </svg>
+          </div>
+
+          {/* Floating Badge: JS */}
+          <div
+            className="floating-badge js-badge-about"
+            style={{
+              position: 'absolute',
+              top: '40%',
+              right: '2%',
+              background: '#fef9c3',
+              color: '#a16207',
+              width: '46px',
+              height: '46px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 900,
+              fontSize: '13px',
+              boxShadow: '0 10px 15px rgba(234, 179, 8, 0.2)',
+              zIndex: 3,
+              border: '2px solid #ffffff',
+            }}
+          >
+            JS
+          </div>
+        </div>
+
+        {/* Right Column: Title, Description, Stats & Button */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
             textAlign: 'left',
           }}
         >
-          <h4 style={{ fontSize: '16px', marginBottom: '12px', color: 'var(--text-highlight)', fontWeight: 800 }}>
-            Passion & Vision
-          </h4>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.6, marginBottom: '16px' }}>
-            I am passionate about solving real-world problems through technology, continuously learning new tools and frameworks, and building products that create meaningful value for users and businesses alike.
+          <h2
+            style={{
+              fontSize: 'clamp(32px, 4.5vw, 44px)',
+              fontWeight: 900,
+              fontFamily: 'var(--font-heading)',
+              marginBottom: '20px',
+              letterSpacing: '-1px',
+            }}
+          >
+            About <span className="text-gradient">Me</span>
+          </h2>
+
+          <p
+            style={{
+              fontSize: '16px',
+              color: 'var(--text-main)',
+              lineHeight: 1.7,
+              marginBottom: '20px',
+              opacity: 0.95,
+            }}
+          >
+            I am a Full Stack Developer with over 2 years of experience building modern web and mobile applications. Currently working at Golden Technologies, where I contribute to the development of SaaS products, CRM systems, CMS platforms, and lead management applications.
           </p>
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-            <span style={{ background: 'rgba(0, 229, 255, 0.05)', padding: '5px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, color: 'var(--accent-primary)' }}>React Native</span>
-            <span style={{ background: 'rgba(0, 229, 255, 0.05)', padding: '5px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, color: 'var(--accent-primary)' }}>Node.js</span>
-            <span style={{ background: 'rgba(0, 229, 255, 0.05)', padding: '5px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, color: 'var(--accent-primary)' }}>MongoDB</span>
-            <span style={{ background: 'rgba(0, 229, 255, 0.05)', padding: '5px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, color: 'var(--accent-primary)' }}>Next.js</span>
+
+          <p
+            style={{
+              fontSize: '16px',
+              color: 'var(--text-main)',
+              lineHeight: 1.7,
+              marginBottom: '32px',
+              opacity: 0.95,
+            }}
+          >
+            My engineering philosophy centers around creating highly modular architectures, prioritizing visual excellence, and optimizing page load speeds. I'm always looking to push the boundaries of WebGL and interactive animation.
+          </p>
+
+          {/* Stats Row */}
+          <div
+            style={{
+              display: 'flex',
+              gap: '30px',
+              width: '100%',
+              marginBottom: '36px',
+              flexWrap: 'wrap',
+            }}
+            className="about-stats-row"
+          >
+            {stats.map((stat, idx) => (
+              <div key={idx} style={{ flex: '1 1 120px' }}>
+                <h3
+                  style={{
+                    fontSize: 'clamp(28px, 4vw, 36px)',
+                    fontWeight: 900,
+                    color: 'var(--accent-primary)',
+                    marginBottom: '4px',
+                    fontFamily: 'var(--font-heading)',
+                  }}
+                >
+                  {stat.value}
+                </h3>
+                <h4
+                  style={{
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    color: 'var(--text-highlight)',
+                    marginBottom: '2px',
+                  }}
+                >
+                  {stat.label}
+                </h4>
+                <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{stat.desc}</p>
+              </div>
+            ))}
           </div>
+
+          {/* Learn More Action Button */}
+          <a
+            href="#skills"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: 'var(--bg-secondary)',
+              border: '1.5px solid var(--accent-primary)',
+              color: 'var(--accent-primary)',
+              fontWeight: 700,
+              padding: '12px 24px',
+              borderRadius: '100px',
+              fontSize: '14px',
+              boxShadow: 'var(--shadow-soft)',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--accent-light)';
+              e.currentTarget.style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--bg-secondary)';
+              e.currentTarget.style.transform = 'none';
+            }}
+          >
+            Learn More <ArrowRight size={16} />
+          </a>
         </div>
       </div>
 
-      {/* Accomplishments Cards Grid */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-          gap: '24px',
-        }}
-      >
-        {stats.map((item, idx) => (
-          <div
-            key={idx}
-            ref={(el) => {
-              if (el) cardRefs.current[idx] = el;
-            }}
-            className="glass-panel"
-            style={{
-              padding: '24px',
-              textAlign: 'left',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '240px',
-            }}
-          >
-            <div>
-              <div style={{ marginBottom: '16px' }}>{item.icon}</div>
-              <h3
-                style={{
-                  fontSize: '24px',
-                  fontWeight: 800,
-                  marginBottom: '4px',
-                  fontFamily: 'var(--font-sans)',
-                }}
-              >
-                {item.value}
-              </h3>
-              <h4 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-highlight)', marginBottom: '8px' }}>
-                {item.label}
-              </h4>
-            </div>
-            <p style={{ color: 'var(--text-muted)', fontSize: '13px', lineHeight: 1.5 }}>
-              {item.desc}
-            </p>
-          </div>
-        ))}
-      </div>
-
+      {/* Floating animations for about section */}
       <style>{`
+        @keyframes float-badge-up-about {
+          0% { transform: translateY(0); }
+          50% { transform: translateY(-6px); }
+          100% { transform: translateY(0); }
+        }
+        @keyframes float-badge-down-about {
+          0% { transform: translateY(0); }
+          50% { transform: translateY(6px); }
+          100% { transform: translateY(0); }
+        }
+        .react-badge-about {
+          animation: float-badge-up-about 4.5s ease-in-out infinite;
+        }
+        .js-badge-about {
+          animation: float-badge-down-about 4s ease-in-out 0.5s infinite;
+        }
+
         @media (max-width: 850px) {
-          .about-grid-content {
+          .about-grid {
             grid-template-columns: 1fr !important;
-            gap: 30px !important;
+            gap: 40px !important;
+          }
+          .about-grid > div {
+            align-items: center !important;
+            text-align: center !important;
+          }
+          .about-avatar-container {
+            height: 340px !important;
+          }
+          .about-stats-row {
+            justify-content: center !important;
+            gap: 20px !important;
           }
         }
       `}</style>

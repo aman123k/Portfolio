@@ -67,16 +67,6 @@ export const ParticlesBg: React.FC = () => {
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw background subtle gradient
-      const bgGrad = ctx.createRadialGradient(
-        width / 2, height / 2, 10,
-        width / 2, height / 2, Math.max(width, height)
-      );
-      bgGrad.addColorStop(0, '#06060c');
-      bgGrad.addColorStop(1, '#020204');
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, width, height);
-
       particles.forEach((p, idx) => {
         // Update physics
         p.x += p.vx;

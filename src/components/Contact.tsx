@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { Mail, Copy, Check } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './Icons';
+import { Mail, Check, Copy } from 'lucide-react';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
   const [submitted, setSubmitted] = useState(false);
 
   const emailAddress = 'sude8920esh@gmail.com';
@@ -17,9 +22,14 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate submit
     setSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      message: '',
+    });
     setTimeout(() => setSubmitted(false), 4000);
   };
 
@@ -32,151 +42,233 @@ export const Contact: React.FC = () => {
       }}
       className="section"
     >
-      {/* Title */}
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-        <h2 style={{ fontSize: '36px', marginBottom: '16px' }}>
-          Get In <span className="text-gradient">Touch</span>
-        </h2>
-        <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '16px' }}>
-          Feel free to reach out for project opportunities, job offers, or just to say hello.
-        </p>
-      </div>
-
+      {/* Redesigned grid container matching mockup */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1.2fr 1.8fr',
-          gap: '50px',
+          gridTemplateColumns: '1fr 1.3fr',
+          gap: '60px',
+          alignItems: 'center',
         }}
-        className="contact-layout"
+        className="contact-grid"
       >
-        {/* Left Column: Direct Links */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', textAlign: 'left' }}>
-          <h3 style={{ fontSize: '22px', marginBottom: '10px' }}>Let's build something amazing together.</h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '15px', lineHeight: 1.6, marginBottom: '20px' }}>
-            I am currently open to Frontend Engineer roles, contracts, and collaboration opportunities. Let me know how I can help!
-          </p>
+        {/* Left Column: 3D Male Contact Avatar & Quick Info */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          <div
+            style={{
+              height: 'min(400px, 100vw)',
+              width: '100%',
+              position: 'relative',
+              marginBottom: '20px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            className="contact-avatar-container"
+          >
+            {/* Main 3D Avatar Image */}
+            <img
+              src="/contact_avatar_man.png"
+              alt="Sudeesh Kumar - Contact 3D Avatar"
+              style={{
+                width: '85%',
+                height: 'auto',
+                objectFit: 'contain',
+                zIndex: 2,
+              }}
+            />
 
-          {/* Email Copy Card */}
+            {/* Floating Mail Envelope Badge with Notification Badge */}
+            <div
+              className="floating-badge mail-badge-contact"
+              style={{
+                position: 'absolute',
+                top: '15%',
+                right: '15%',
+                background: '#ffffff',
+                border: '2px solid var(--accent-primary)',
+                padding: '10px',
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: 'var(--shadow-accent)',
+                zIndex: 3,
+              }}
+            >
+              <Mail size={22} color="var(--accent-primary)" />
+              {/* Notification Bubble "1" */}
+              <span
+                style={{
+                  position: 'absolute',
+                  top: '-8px',
+                  right: '-8px',
+                  background: '#ef4444',
+                  color: '#ffffff',
+                  borderRadius: '50%',
+                  width: '18px',
+                  height: '18px',
+                  fontSize: '10px',
+                  fontWeight: 900,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 2px 5px rgba(239, 68, 68, 0.4)',
+                }}
+              >
+                1
+              </span>
+            </div>
+          </div>
+
+          {/* Direct Email Copy Card */}
           <div
             className="glass-panel"
             style={{
-              padding: '24px',
+              width: '100%',
+              maxWidth: '360px',
+              padding: '16px 20px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               gap: '15px',
+              border: '1.5px solid var(--border-color)',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div
                 style={{
-                  background: 'rgba(0, 242, 254, 0.08)',
-                  padding: '12px',
-                  borderRadius: '10px',
+                  background: 'var(--accent-light)',
+                  padding: '8px',
+                  borderRadius: '8px',
                   display: 'flex',
+                  color: 'var(--accent-primary)',
                 }}
               >
-                <Mail color="var(--accent-cyan)" size={20} />
+                <Mail size={16} />
               </div>
-              <div>
-                <h4 style={{ fontSize: '13px', color: 'var(--text-muted)', fontWeight: 500, marginBottom: '2px' }}>Email Address</h4>
-                <p style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-highlight)' }}>{emailAddress}</p>
+              <div style={{ textAlign: 'left' }}>
+                <h4 style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase' }}>
+                  Email
+                </h4>
+                <p style={{ fontSize: '13.5px', fontWeight: 700, color: 'var(--text-highlight)' }}>
+                  {emailAddress}
+                </p>
               </div>
             </div>
             <button
               onClick={handleCopyEmail}
               style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '8px',
-                padding: '10px',
-                color: 'var(--text-main)',
+                background: 'var(--bg-tertiary)',
+                border: 'none',
+                borderRadius: '6px',
+                padding: '6px',
+                color: 'var(--text-highlight)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'all 0.3s ease',
+                transition: 'all 0.25s ease',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--accent-cyan)')}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-primary)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-highlight)')}
             >
-              {copied ? <Check size={18} color="var(--accent-neon-green)" /> : <Copy size={18} />}
+              {copied ? <Check size={14} color="#10b981" /> : <Copy size={14} />}
             </button>
-          </div>
-
-          {/* Social connection links */}
-          <div style={{ display: 'flex', gap: '15px', marginTop: '10px' }}>
-            <a
-              href="https://www.linkedin.com/in/sudeesh-kumar-a1a1b4260/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-panel"
-              style={{
-                flex: 1,
-                padding: '20px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '10px',
-                fontSize: '15px',
-                fontWeight: 600,
-              }}
-            >
-              <LinkedinIcon size={18} color="var(--accent-blue)" /> LinkedIn
-            </a>
-            <a
-              href="https://github.com/aman123k"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-panel"
-              style={{
-                flex: 1,
-                padding: '20px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '10px',
-                fontSize: '15px',
-                fontWeight: 600,
-              }}
-            >
-              <GithubIcon size={18} color="var(--text-highlight)" /> GitHub
-            </a>
           </div>
         </div>
 
-        {/* Right Column: Contact Form */}
-        <div className="glass-panel" style={{ padding: '40px' }}>
+        {/* Right Column: Contact Form Panel */}
+        <div
+          className="glass-panel contact-form-panel"
+          style={{
+            padding: '40px',
+            border: '1.5px solid var(--border-color)',
+            width: '100%',
+          }}
+        >
+          <div style={{ textAlign: 'left', marginBottom: '32px' }}>
+            <h2
+              style={{
+                fontSize: 'clamp(28px, 4vw, 36px)',
+                fontWeight: 900,
+                marginBottom: '8px',
+                fontFamily: 'var(--font-heading)',
+              }}
+            >
+              Get In <span className="text-gradient">Touch</span>
+            </h2>
+            <p style={{ color: 'var(--text-main)', opacity: 0.8, fontSize: '15px' }}>
+              Let's discuss your project
+            </p>
+          </div>
+
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px', textAlign: 'left' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                Your Name
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="John Doe"
-                style={{
-                  width: '100%',
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
-                  padding: '14px 18px',
-                  color: 'var(--text-highlight)',
-                  fontSize: '15px',
-                  outline: 'none',
-                  transition: 'border-color 0.3s ease',
-                }}
-                onFocus={(e) => (e.target.style.borderColor = 'var(--accent-cyan)')}
-                onBlur={(e) => (e.target.style.borderColor = 'var(--border-color)')}
-              />
+            {/* First Name & Last Name Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }} className="form-row-2col">
+              <div>
+                <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                  placeholder="John"
+                  style={{
+                    width: '100%',
+                    background: 'var(--bg-tertiary)',
+                    border: '1.5px solid var(--border-color)',
+                    borderRadius: '10px',
+                    padding: '12px 16px',
+                    color: 'var(--text-highlight)',
+                    fontSize: '14px',
+                    outline: 'none',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = 'var(--accent-primary)')}
+                  onBlur={(e) => (e.target.style.borderColor = 'var(--border-color)')}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                  placeholder="Doe"
+                  style={{
+                    width: '100%',
+                    background: 'var(--bg-tertiary)',
+                    border: '1.5px solid var(--border-color)',
+                    borderRadius: '10px',
+                    padding: '12px 16px',
+                    color: 'var(--text-highlight)',
+                    fontSize: '14px',
+                    outline: 'none',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = 'var(--accent-primary)')}
+                  onBlur={(e) => (e.target.style.borderColor = 'var(--border-color)')}
+                />
+              </div>
             </div>
 
+            {/* Email Address */}
             <div>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Email Address
               </label>
               <input
@@ -187,77 +279,105 @@ export const Contact: React.FC = () => {
                 placeholder="john@example.com"
                 style={{
                   width: '100%',
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
-                  padding: '14px 18px',
+                  background: 'var(--bg-tertiary)',
+                  border: '1.5px solid var(--border-color)',
+                  borderRadius: '10px',
+                  padding: '12px 16px',
                   color: 'var(--text-highlight)',
-                  fontSize: '15px',
+                  fontSize: '14px',
                   outline: 'none',
-                  transition: 'border-color 0.3s ease',
+                  transition: 'all 0.3s ease',
                 }}
-                onFocus={(e) => (e.target.style.borderColor = 'var(--accent-cyan)')}
+                onFocus={(e) => (e.target.style.borderColor = 'var(--accent-primary)')}
                 onBlur={(e) => (e.target.style.borderColor = 'var(--border-color)')}
               />
             </div>
 
+            {/* Phone Number */}
             <div>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                Message
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                placeholder="+1 (555) 000-0000"
+                style={{
+                  width: '100%',
+                  background: 'var(--bg-tertiary)',
+                  border: '1.5px solid var(--border-color)',
+                  borderRadius: '10px',
+                  padding: '12px 16px',
+                  color: 'var(--text-highlight)',
+                  fontSize: '14px',
+                  outline: 'none',
+                  transition: 'all 0.3s ease',
+                }}
+                onFocus={(e) => (e.target.style.borderColor = 'var(--accent-primary)')}
+                onBlur={(e) => (e.target.style.borderColor = 'var(--border-color)')}
+              />
+            </div>
+
+            {/* Your Message */}
+            <div>
+              <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Your Message
               </label>
               <textarea
                 required
                 rows={4}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                placeholder="Hi Sudeesh, let's connect..."
+                placeholder="Type your message here..."
                 style={{
                   width: '100%',
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
-                  padding: '14px 18px',
+                  background: 'var(--bg-tertiary)',
+                  border: '1.5px solid var(--border-color)',
+                  borderRadius: '10px',
+                  padding: '12px 16px',
                   color: 'var(--text-highlight)',
-                  fontSize: '15px',
+                  fontSize: '14px',
                   outline: 'none',
                   resize: 'vertical',
-                  transition: 'border-color 0.3s ease',
+                  transition: 'all 0.3s ease',
                 }}
-                onFocus={(e) => (e.target.style.borderColor = 'var(--accent-cyan)')}
+                onFocus={(e) => (e.target.style.borderColor = 'var(--accent-primary)')}
                 onBlur={(e) => (e.target.style.borderColor = 'var(--border-color)')}
               />
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
               style={{
                 background: 'var(--accent-gradient)',
-                color: '#000',
+                color: '#ffffff',
                 border: 'none',
-                borderRadius: '8px',
+                borderRadius: '100px',
                 padding: '16px',
                 fontSize: '15px',
                 fontWeight: 700,
                 cursor: 'pointer',
                 textAlign: 'center',
                 transition: 'all 0.3s ease',
-                boxShadow: '0 4px 15px rgba(0,242,254,0.2)',
+                boxShadow: 'var(--shadow-accent)',
                 marginTop: '10px',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,242,254,0.4)';
+                e.currentTarget.style.boxShadow = '0 12px 24px rgba(255, 122, 0, 0.35)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'none';
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,242,254,0.2)';
+                e.currentTarget.style.boxShadow = 'var(--shadow-accent)';
               }}
             >
               Send Message
             </button>
 
             {submitted && (
-              <p style={{ color: 'var(--accent-neon-green)', fontSize: '14px', textAlign: 'center', marginTop: '10px' }}>
+              <p style={{ color: '#10b981', fontSize: '14px', fontWeight: 700, textAlign: 'center', marginTop: '10px' }}>
                 Thank you! Your message has been sent successfully.
               </p>
             )}
@@ -269,28 +389,50 @@ export const Contact: React.FC = () => {
       <footer
         style={{
           marginTop: '100px',
-          borderTop: '1px solid rgba(255,255,255,0.05)',
-          paddingTop: '30px',
+          borderTop: '1.5px solid var(--border-color)',
+          paddingTop: '36px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '20px',
-          fontSize: '13px',
+          fontSize: '13.5px',
           color: 'var(--text-muted)',
         }}
       >
         <p>© 2026 Sudeesh Kumar. All rights reserved.</p>
         <p style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-          Designed and built with React, GSAP, and 💙
+          Designed and built with React, GSAP, and 🧡
         </p>
       </footer>
 
+      {/* Responsive adjustments */}
       <style>{`
+        @keyframes float-badge-contact {
+          0% { transform: translateY(0); }
+          50% { transform: translateY(-7px); }
+          100% { transform: translateY(0); }
+        }
+        .mail-badge-contact {
+          animation: float-badge-contact 4.8s ease-in-out infinite;
+        }
+
         @media (max-width: 850px) {
-          .contact-layout {
+          .contact-grid {
             grid-template-columns: 1fr !important;
             gap: 40px !important;
+          }
+          .contact-avatar-container {
+            height: 340px !important;
+          }
+          .contact-form-panel {
+            padding: 30px 24px !important;
+          }
+        }
+        @media (max-width: 500px) {
+          .form-row-2col {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
           }
         }
       `}</style>
