@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Check, Copy } from 'lucide-react';
+import { Mail, Check, Copy, Send, Loader2 } from 'lucide-react';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -10,9 +10,13 @@ export const Contact: React.FC = () => {
     phone: '',
     message: '',
   });
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const emailAddress = 'sude8920esh@gmail.com';
+
+  // Get a free Access Key from https://web3forms.com/ to send submissions directly to sude8920esh@gmail.com
+  const WEB3FORMS_ACCESS_KEY = "YOUR_ACCESS_KEY_HERE"; 
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -20,17 +24,62 @@ export const Contact: React.FC = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      message: '',
-    });
-    setTimeout(() => setSubmitted(false), 4000);
+    setSubmitting(true);
+
+    // If key is not configured, simulate success for demo/testing
+    if (WEB3FORMS_ACCESS_KEY === "YOUR_ACCESS_KEY_HERE" || !WEB3FORMS_ACCESS_KEY) {
+      console.warn("Web3Forms Access Key is not configured. Simulating successful form submission.");
+      setTimeout(() => {
+        setSubmitting(false);
+        setSubmitted(true);
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          message: '',
+        });
+        setTimeout(() => setSubmitted(false), 4000);
+      }, 1200);
+      return;
+    }
+
+    // Submit payload to Web3Forms API
+    const formDataObj = new FormData();
+    formDataObj.append('access_key', WEB3FORMS_ACCESS_KEY);
+    formDataObj.append('name', `${formData.firstName} ${formData.lastName}`);
+    formDataObj.append('email', formData.email);
+    formDataObj.append('phone', formData.phone);
+    formDataObj.append('message', formData.message);
+    formDataObj.append('subject', `New Portfolio Contact Form Submission from ${formData.firstName}`);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataObj,
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          message: '',
+        });
+      } else {
+        alert('Form submission failed: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('An error occurred during submission. Please try again.');
+    } finally {
+      setSubmitting(false);
+      setTimeout(() => setSubmitted(false), 4000);
+    }
   };
 
   return (
@@ -350,6 +399,7 @@ export const Contact: React.FC = () => {
             {/* Submit Button */}
             <button
               type="submit"
+              disabled={submitting}
               style={{
                 background: 'var(--accent-gradient)',
                 color: '#ffffff',
@@ -363,17 +413,31 @@ export const Contact: React.FC = () => {
                 transition: 'all 0.3s ease',
                 boxShadow: 'var(--shadow-accent)',
                 marginTop: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 12px 24px rgba(255, 122, 0, 0.35)';
+                if (!submitting) {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 12px 24px rgba(255, 122, 0, 0.35)';
+                }
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'none';
                 e.currentTarget.style.boxShadow = 'var(--shadow-accent)';
               }}
             >
-              Send Message
+              {submitting ? (
+                <>
+                  <Loader2 className="animate-spin" size={18} /> Submitting...
+                </>
+              ) : (
+                <>
+                  Send Message <Send size={16} />
+                </>
+              )}
             </button>
 
             {submitted && (
@@ -385,27 +449,6 @@ export const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Footer copyright */}
-      <footer
-        style={{
-          marginTop: '100px',
-          borderTop: '1.5px solid var(--border-color)',
-          paddingTop: '36px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '20px',
-          fontSize: '13.5px',
-          color: 'var(--text-muted)',
-        }}
-      >
-        <p>© 2026 Sudeesh Kumar. All rights reserved.</p>
-        <p style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-          Designed and built with React, GSAP, and 🧡
-        </p>
-      </footer>
-
       {/* Responsive adjustments */}
       <style>{`
         @keyframes float-badge-contact {
@@ -415,6 +458,14 @@ export const Contact: React.FC = () => {
         }
         .mail-badge-contact {
           animation: float-badge-contact 4.8s ease-in-out infinite;
+        }
+        
+        .animate-spin {
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
 
         @media (max-width: 850px) {
