@@ -1,4 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface SkillItem {
   name: string;
@@ -9,6 +13,35 @@ interface SkillItem {
 
 export const Skills: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        }
+      });
+
+      tl.fromTo(
+        ['h2', 'p'],
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }
+      )
+      .fromTo(
+        '.skills-marquee-container',
+        { opacity: 0, scale: 0.95, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.4'
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const skillsList: SkillItem[] = [
     {
@@ -337,7 +370,7 @@ export const Skills: React.FC = () => {
           My <span className="text-gradient">Skills</span>
         </h2>
         <p style={{ color: 'var(--text-main)', opacity: 0.8, fontSize: '15px' }}>
-          Technologies and tools I work with to create amazing web experiences
+          Stack I've used in real production apps, from day-one startups to multi-client agencies.
         </p>
       </div>
 

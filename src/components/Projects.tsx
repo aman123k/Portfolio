@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ExternalLink, Code2 } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Project {
   title: string;
@@ -14,6 +18,45 @@ interface Project {
 
 export const Projects: React.FC = () => {
   const [filter, setFilter] = useState<"all" | "personal" | "company">("all");
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    // Stagger fade-in when filter changes
+    gsap.fromTo(
+      '.project-card-container',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' }
+    );
+  }, [filter]);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        }
+      });
+
+      tl.fromTo(
+        ['h2', 'p', 'button'],
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }
+      )
+      .fromTo(
+        '.projects-grid',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.4'
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const projectList: Project[] = [
     {
@@ -204,6 +247,7 @@ export const Projects: React.FC = () => {
   return (
     <section
       id="projects"
+      ref={containerRef}
       style={{
         paddingTop: "80px",
         paddingBottom: "80px",
@@ -233,7 +277,7 @@ export const Projects: React.FC = () => {
             opacity: 0.85,
           }}
         >
-          A showcase of my recent work. Featuring scalable SaaS platforms, commercial clients, and dynamic dashboards.
+          Hand-picked projects built in production. Covering multi-tenant SaaS, CMS-driven business sites, and AI-powered apps shipped at real scale.
         </p>
       </div>
 

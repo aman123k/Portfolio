@@ -1,7 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Check, Copy, Send, Loader2 } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Contact: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        }
+      });
+
+      tl.fromTo(
+        '.contact-avatar-container',
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' }
+      )
+      .fromTo(
+        '.contact-grid > div:last-child',
+        { opacity: 0, y: 35 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.6'
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -85,6 +120,7 @@ export const Contact: React.FC = () => {
   return (
     <section
       id="contact"
+      ref={containerRef}
       style={{
         paddingTop: '80px',
         paddingBottom: '40px',

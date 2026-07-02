@@ -73,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               letterSpacing: "-0.5px",
             }}
           >
-            Portfolio<span style={{ color: "var(--accent-primary)" }}>.</span>
+            Sudeesh<span style={{ color: "var(--accent-primary)" }}>.</span>
           </a>
 
           {/* Theme Toggle Button */}

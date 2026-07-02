@@ -1,7 +1,42 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const About: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        }
+      });
+
+      tl.fromTo(
+        '.about-avatar-container',
+        { opacity: 0, x: -50 },
+        { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }
+      )
+      .fromTo(
+        ['h2', 'p', '.about-stats-row', 'a'],
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
+        '-=0.5'
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const stats = [
     {
       value: '5+',
@@ -23,6 +58,7 @@ export const About: React.FC = () => {
   return (
     <section
       id="about"
+      ref={containerRef}
       style={{
         paddingTop: '80px',
         paddingBottom: '80px',
@@ -159,7 +195,7 @@ export const About: React.FC = () => {
               opacity: 0.95,
             }}
           >
-            My engineering philosophy centers around creating highly modular architectures, prioritizing visual excellence, and optimizing page load speeds. I'm always looking to push the boundaries of WebGL and interactive animation.
+            I care deeply about clean code, fast page loads, and interfaces that feel alive. Whether it's a GSAP animation, a complex form wizard, or a real-time socket feature, I approach every problem the same way — ship it well or don't ship it.
           </p>
 
           {/* Stats Row */}

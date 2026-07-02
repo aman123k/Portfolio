@@ -1,7 +1,57 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Download, Mail } from "lucide-react";
+import { gsap } from "gsap";
 
 export const Hero: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const timeline = gsap.timeline();
+      
+      timeline.fromTo(
+        '.socials-container a',
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' }
+      )
+      .fromTo(
+        'h1',
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+        '-=0.3'
+      )
+      .fromTo(
+        'p',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+        '-=0.4'
+      )
+      .fromTo(
+        '.hero-ctas-container a',
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' },
+        '-=0.4'
+      );
+
+      gsap.fromTo(
+        '.hero-avatar-container img',
+        { opacity: 0, scale: 0.92 },
+        { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out', delay: 0.2 }
+      );
+
+      gsap.fromTo(
+        '.floating-badge',
+        { opacity: 0, scale: 0 },
+        { opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.7)', delay: 0.5 }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const socialLinks = [
     {
       name: "Instagram",
@@ -64,6 +114,7 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="home"
+      ref={containerRef}
       style={{
         minHeight: "100vh",
         display: "flex",
@@ -158,13 +209,13 @@ export const Hero: React.FC = () => {
             opacity: 0.9,
           }}
         >
-          I am a Full Stack Developer specializing in building modern,
-          interactive, and high-performance web applications using React,
-          Next.js, TypeScript, and Tailwind CSS.
+          Full Stack Engineer at The Gold Technologies. I build production SaaS platforms,
+          CMS-driven sites, and real-time apps using React, Next.js, Node.js, and TypeScript.
         </p>
 
         {/* CTAs */}
         <div
+          className="hero-ctas-container"
           style={{
             display: "flex",
             flexWrap: "wrap",

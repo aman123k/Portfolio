@@ -2,7 +2,7 @@
   /* Default Light Theme - Warm Orange Accent */
   --bg-primary: #ffffff;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #f1f5f9;
+  --bg-tertiary: #f8fafc;
   --bg-navbar: rgba(255, 255, 255, 0.75);
   
   --accent-primary: #ff7a00;
@@ -120,7 +120,6 @@ a {
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
   box-shadow: 0 0 10px var(--accent-primary);
   transition: width 0.2s, height 0.2s, background-color 0.2s;
 }
@@ -247,35 +246,7 @@ a {
   }
 }
 
-/* Global Vertical Scroll Connector Line */
-.scroll-path-container {
-  position: absolute;
-  left: 50px;
-  top: 0;
-  bottom: 0;
-  width: 1.5px;
-  background: rgba(0, 0, 0, 0.03);
-  z-index: 5;
-}
 
-[data-theme="dark"] .scroll-path-container {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.scroll-path-progress {
-  width: 100%;
-  height: 100%;
-  background: var(--accent-gradient);
-  transform-origin: top;
-  transform: scaleY(0);
-  box-shadow: 0 0 10px var(--accent-primary);
-}
-
-@media (max-width: 1024px) {
-  .scroll-path-container {
-    display: none;
-  }
-}
 
 /* Skills card items with hover progress animations */
 .skill-progress-bar {
@@ -299,3 +270,124 @@ a {
 .project-card-container:hover .project-screenshot {
   transform: scale(1.05);
 }
+
+/* Light Mode Background & Sun System */
+.light-bg-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #ffffff;
+  overflow: hidden;
+  transition: opacity 0.5s ease;
+}
+
+.light-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(0, 0, 0, 0.02) 1.2px, transparent 1.2px),
+    linear-gradient(to right, rgba(0, 0, 0, 0.01) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 1px, transparent 1px);
+  background-size: 40px 40px, 80px 80px, 80px 80px;
+  background-position: center;
+  opacity: 0.8;
+}
+
+/* Sun System position absolute inside the fixed background container */
+.sun-system {
+  position: absolute;
+  top: 10%;
+  right: -50px;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform-origin: center;
+}
+
+.sun-glow {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sun-glow.gold-glow {
+  background: radial-gradient(circle, rgba(255, 122, 0, 0.08) 0%, rgba(255, 145, 48, 0.02) 50%, rgba(255, 122, 0, 0) 70%);
+}
+
+.sun-glow.sunset-glow {
+  background: radial-gradient(circle, rgba(230, 74, 25, 0.12) 0%, rgba(183, 28, 28, 0.03) 50%, rgba(183, 28, 28, 0) 70%);
+  opacity: 0;
+}
+
+.sun-core {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 25px rgba(255, 122, 0, 0.25),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.08),
+    inset 0 6px 12px rgba(255, 255, 255, 0.35);
+  z-index: 5;
+  transition: opacity 0.3s ease;
+}
+
+.sun-core.gold-core {
+  background: linear-gradient(135deg, #ffdf80 0%, #ff9d33 60%, #ff6a00 100%);
+}
+
+.sun-core.sunset-core {
+  background: linear-gradient(135deg, #ff8c66 0%, #e64a19 60%, #b71c1c 100%);
+  opacity: 0;
+}
+
+.sun-satellite {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  box-shadow: 0 0 8px var(--accent-primary);
+  transform: translateX(-50%);
+}
+
+.sun-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 122, 0, 0.08);
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.sun-ring.ring-1 {
+  width: 180px;
+  height: 180px;
+  border-style: solid;
+  border-color: rgba(255, 122, 0, 0.12) rgba(255, 122, 0, 0.02) rgba(255, 122, 0, 0.05) rgba(255, 122, 0, 0.02);
+}
+
+.sun-ring.ring-2 {
+  width: 250px;
+  height: 250px;
+  border-style: dashed;
+  border-color: rgba(255, 122, 0, 0.08);
+  border-width: 1px;
+}
+
+.sun-ring.ring-3 {
+  width: 330px;
+  height: 330px;
+  border-style: double;
+  border-color: rgba(255, 122, 0, 0.04);
+}
+

@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Components
 import { ParticlesBg } from './components/ParticlesBg';
+import { LightBg } from './components/LightBg';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -18,7 +19,6 @@ import { Footer } from './components/Footer';
 
 function App() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
-  const pathRef = useRef<HTMLDivElement | null>(null);
   
   // Theme state lifted to App level
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -49,6 +49,9 @@ function App() {
     };
 
     requestAnimationFrame(raf);
+
+    // Sync Lenis with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
 
     // 2. Custom Cursor Follower using GSAP
     const moveCursor = (e: MouseEvent) => {
@@ -83,22 +86,7 @@ function App() {
       el.addEventListener('mouseleave', handleMouseLeave);
     });
 
-    // 4. Global Scroll Path progress line animation
-    let scrollTween: gsap.core.Tween | null = null;
-    if (pathRef.current) {
-      scrollTween = gsap.to(pathRef.current, {
-        scaleY: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: 'body',
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 0.3,
-        },
-      });
-    }
-
-    // 5. Magnetic Hover Effect inspired by Lusion.co
+    // 4. Magnetic Hover Effect inspired by Lusion.co
     const magneticElements = document.querySelectorAll('.magnetic');
     const handleMagneticMove = (e: Event) => {
       const mouseEvent = e as MouseEvent;
@@ -130,9 +118,21 @@ function App() {
       el.addEventListener('mouseleave', handleMagneticLeave);
     });
 
+    // Recalculate ScrollTrigger parameters on load and dynamic render
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('load', handleLoad);
+
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000);
+
     // Clean up
     return () => {
       window.removeEventListener('mousemove', moveCursor);
+      window.removeEventListener('load', handleLoad);
+      clearTimeout(refreshTimer);
       interactiveElements.forEach((el) => {
         el.removeEventListener('mouseenter', handleMouseEnter);
         el.removeEventListener('mouseleave', handleMouseLeave);
@@ -141,10 +141,6 @@ function App() {
         el.removeEventListener('mousemove', handleMagneticMove);
         el.removeEventListener('mouseleave', handleMagneticLeave);
       });
-      if (scrollTween) {
-        scrollTween.scrollTrigger?.kill();
-        scrollTween.kill();
-      }
       lenis.destroy();
     };
   }, []);
@@ -156,6 +152,9 @@ function App() {
 
       {/* High-quality Canvas Interactive Particles - Only rendered in Dark Mode */}
       {theme === 'dark' && <ParticlesBg />}
+
+      {/* Light Mode Sun Background */}
+      {theme === 'light' && <LightBg />}
 
       {/* Decorative Blur Orbs - Only rendered in Dark Mode */}
       {theme === 'dark' && (
@@ -170,10 +169,6 @@ function App() {
 
       {/* Layout Content */}
       <main style={{ position: 'relative', zIndex: 10 }}>
-        {/* Global Scroll Indicator Line */}
-        <div className="scroll-path-container">
-          <div ref={pathRef} className="scroll-path-progress" />
-        </div>
 
         {/* Sections */}
         <Hero />
