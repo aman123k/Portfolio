@@ -100,6 +100,7 @@ export const Footer: React.FC = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
+    { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -249,7 +250,7 @@ export const Footer: React.FC = () => {
               </a>
             </p>
             <p style={{ opacity: 0.85 }}>
-              Golden Technologies
+              The Gold Technologies
             </p>
             {/* Scroll to Top Button */}
             <button

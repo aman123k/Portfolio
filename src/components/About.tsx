@@ -147,7 +147,7 @@ export const About: React.FC = () => {
               opacity: 0.95,
             }}
           >
-            I am a Full Stack Developer with over 2 years of experience building modern web and mobile applications. Currently working at Golden Technologies, where I contribute to the development of SaaS products, CRM systems, CMS platforms, and lead management applications.
+            I am a Full Stack Engineer with over 2 years of experience building scalable SaaS applications, CMS platforms, e-commerce solutions, and real-time systems. Currently working at The Gold Technologies, where I build high-performance modern web architectures using React, Next.js, Remix, Node.js, and TypeScript.
           </p>
 
           <p

@@ -65,7 +65,7 @@ html {
   background-color: var(--bg-primary);
   color: var(--text-main);
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -74,7 +74,7 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Custom Scrollbar */
@@ -293,4 +293,9 @@ a {
   border-radius: 100px;
   transform-origin: left;
   transition: transform 1s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+/* Projects card interactive screenshot hover effects */
+.project-card-container:hover .project-screenshot {
+  transform: scale(1.05);
 }
