@@ -173,7 +173,7 @@ export const Hero: React.FC = () => {
           }}
         >
           <a
-            href="/resume.pdf"
+            href="/resume-sheet.pdf"
             download="Sudeesh_Kumar_Resume.pdf"
             style={{
               display: "inline-flex",
