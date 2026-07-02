@@ -29,28 +29,28 @@
 }
 
 [data-theme="dark"] {
-  /* Premium Dark Theme */
-  --bg-primary: #0b0f19;
-  --bg-secondary: #111827;
-  --bg-tertiary: #1f2937;
-  --bg-navbar: rgba(17, 24, 39, 0.75);
-  
+  /* Deep Space Dark Theme */
+  --bg-primary:  #020208;
+  --bg-secondary: rgba(255, 255, 255, 0.055);
+  --bg-tertiary:  rgba(255, 255, 255, 0.08);
+  --bg-navbar: rgba(2, 2, 12, 0.82);
+
   --accent-primary: #ff7a00;
   --accent-secondary: #ff9130;
   --accent-light: rgba(255, 122, 0, 0.15);
   --accent-gradient: linear-gradient(135deg, #ff7a00 0%, #ff9500 100%);
-  
-  --text-main: #9ca3af;
-  --text-highlight: #f3f4f6;
-  --text-muted: #6b7280;
-  --text-on-accent: #0b0f19;
-  
-  --border-color: rgba(31, 41, 55, 0.6);
-  --border-hover: rgba(255, 122, 0, 0.5);
-  
-  --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.25);
-  --shadow-medium: 0 20px 25px -5px rgba(0, 0, 0, 0.35), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
-  --shadow-accent: 0 10px 20px -3px rgba(255, 122, 0, 0.3);
+
+  --text-main: #b0bcd4;
+  --text-highlight: #ffffff;
+  --text-muted: #7a8aaa;
+  --text-on-accent: #020208;
+
+  --border-color: rgba(255, 255, 255, 0.10);
+  --border-hover: rgba(255, 122, 0, 0.55);
+
+  --shadow-soft:   0 8px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
+  --shadow-medium: 0 16px 48px rgba(0,0,0,0.7),  inset 0 1px 0 rgba(255,255,255,0.08);
+  --shadow-accent: 0 10px 30px -3px rgba(255,122,0,0.35);
 }
 
 * {
@@ -182,6 +182,26 @@ a {
   border-color: var(--border-hover);
   box-shadow: var(--shadow-medium);
   transform: translateY(-4px);
+}
+
+/* Dark mode: true frosted glass so cards stand out against deep space */
+[data-theme="dark"] .glass-panel {
+  background: rgba(14, 18, 36, 0.72);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+}
+
+[data-theme="dark"] .glass-panel:hover {
+  background: rgba(20, 26, 50, 0.82);
+  border-color: rgba(255, 122, 0, 0.5);
+  box-shadow:
+    0 16px 48px rgba(0,0,0,0.65),
+    0 0 0 1px rgba(255,122,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.09);
 }
 
 /* Background Glow Orbs */
@@ -391,3 +411,255 @@ a {
   border-color: rgba(255, 122, 0, 0.04);
 }
 
+/* ==========================================
+   DEEP SPACE BACKGROUND (Dark Mode)
+   ========================================== */
+
+.space-bg-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 20% 30%, #070b1a 0%, #02020a 55%, #000000 100%);
+  overflow: hidden;
+}
+
+.space-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Nebula glow clouds */
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.1;
+  filter: blur(80px);
+}
+
+.nebula-1 {
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(88, 28, 135, 0.6) 0%, rgba(59, 7, 100, 0.3) 50%, transparent 80%);
+  top: -10%;
+  right: 5%;
+  transform-origin: center;
+}
+
+.nebula-2 {
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(7, 89, 133, 0.5) 0%, rgba(3, 45, 72, 0.3) 50%, transparent 80%);
+  bottom: 5%;
+  left: -5%;
+  transform-origin: center;
+}
+
+/* Planet wrappers */
+.planet {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Each animation layer (mouse, float) fills its parent */
+.planet-layer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Planet 1: Ringed Gas Giant (top-right) ---- */
+.planet-1 {
+  top: 4%;
+  right: 6%;
+  width: 160px;
+  height: 160px;
+}
+
+.planet-1-body {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 38% 35%,
+    #c8860a 0%, #a0620a 20%, #7a480a 40%, #5c3208 60%, #3a1f04 80%, #1a0d02 100%);
+  box-shadow:
+    inset -18px -18px 35px rgba(0,0,0,0.7),
+    inset 8px 8px 20px rgba(255, 180, 60, 0.2),
+    0 0 40px rgba(200, 120, 10, 0.3),
+    0 0 80px rgba(180, 100, 10, 0.15);
+  overflow: hidden;
+}
+
+.planet-1-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0%, transparent 10%,
+    rgba(255, 200, 80, 0.06) 10%, rgba(255, 200, 80, 0.06) 18%,
+    transparent 18%, transparent 30%,
+    rgba(255, 140, 20, 0.05) 30%, rgba(255, 140, 20, 0.05) 38%
+  );
+}
+
+.planet-1-ring {
+  width: 220px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(72deg);
+  background: radial-gradient(ellipse at center,
+    transparent 35%,
+    rgba(200, 150, 60, 0.25) 38%,
+    rgba(220, 170, 80, 0.45) 48%,
+    rgba(200, 150, 60, 0.3) 56%,
+    rgba(160, 110, 40, 0.2) 64%,
+    rgba(120, 80, 30, 0.12) 72%,
+    transparent 78%
+  );
+  box-shadow: 0 0 20px rgba(200, 150, 60, 0.1);
+}
+
+.planet-1-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(200, 120, 10, 0.18) 0%, transparent 70%);
+  filter: blur(20px);
+}
+
+/* ---- Planet 2: Ice/Ocean Planet (bottom-left) ---- */
+.planet-2 {
+  bottom: 12%;
+  left: 5%;
+  width: 90px;
+  height: 90px;
+}
+
+.planet-2-body {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 40% 35%,
+    #7de8ff 0%, #2ab8d8 20%, #1480a0 45%, #0a5070 70%, #042840 100%);
+  box-shadow:
+    inset -10px -10px 20px rgba(0,0,0,0.6),
+    inset 5px 5px 12px rgba(120, 240, 255, 0.2),
+    0 0 25px rgba(60, 180, 220, 0.35),
+    0 0 55px rgba(40, 140, 180, 0.15);
+}
+
+.planet-2-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 60% 25%, rgba(255,255,255,0.12) 0%, transparent 55%);
+}
+
+.planet-2-glow {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(60, 180, 230, 0.2) 0%, transparent 70%);
+  filter: blur(14px);
+}
+
+/* ---- Planet 3: Tiny Distant Red Planet (left-center) ---- */
+.planet-3 {
+  top: 38%;
+  left: 3%;
+  width: 44px;
+  height: 44px;
+}
+
+.planet-3-body {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 40% 35%,
+    #e87050 0%, #c04830 30%, #8a2818 65%, #4a1008 100%);
+  box-shadow:
+    inset -5px -5px 10px rgba(0,0,0,0.6),
+    0 0 16px rgba(200, 80, 40, 0.4),
+    0 0 36px rgba(180, 60, 30, 0.15);
+}
+
+.planet-3-glow {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(200, 80, 40, 0.25) 0%, transparent 70%);
+  filter: blur(10px);
+}
+
+/* ── Skills Marquee ───────────────────────────────────────────── */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.track-left {
+  animation: marquee-left 38s linear infinite;
+}
+
+.track-left:hover {
+  animation-play-state: paused;
+}
+
+.track-right {
+  animation: marquee-right 42s linear infinite;
+}
+
+.track-right:hover {
+  animation-play-state: paused;
+}
+
+.skill-card {
+  border-radius: 16px !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.skill-card:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+}

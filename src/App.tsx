@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // Components
-import { ParticlesBg } from './components/ParticlesBg';
+import { SpaceBg } from './components/SpaceBg';
 import { LightBg } from './components/LightBg';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -150,19 +150,11 @@ function App() {
       {/* Custom Cursor Dot */}
       <div ref={cursorRef} className="custom-cursor" />
 
-      {/* High-quality Canvas Interactive Particles - Only rendered in Dark Mode */}
-      {theme === 'dark' && <ParticlesBg />}
+      {/* Deep Space Background – Dark Mode only */}
+      {theme === 'dark' && <SpaceBg />}
 
       {/* Light Mode Sun Background */}
       {theme === 'light' && <LightBg />}
-
-      {/* Decorative Blur Orbs - Only rendered in Dark Mode */}
-      {theme === 'dark' && (
-        <>
-          <div className="glow-orb orb-cyan" />
-          <div className="glow-orb orb-purple" />
-        </>
-      )}
 
       {/* Sticky Header Navbar */}
       <Navbar theme={theme} toggleTheme={toggleTheme} />
