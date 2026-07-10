@@ -23,22 +23,28 @@ interface ShootingStar {
   active: boolean;
 }
 
+interface GalaxyParticle {
+  distance: number;
+  angle: number;
+  speed: number;
+  size: number;
+  color: string;
+  opacity: number;
+}
+
 export const SpaceBg: React.FC = () => {
   const canvasRef   = useRef<HTMLCanvasElement | null>(null);
   const mouseRef    = useRef({ x: 0.5, y: 0.5 });
 
   // Layer 1: scroll movement
-  const p1ScrollRef = useRef<HTMLDivElement | null>(null);
   const p2ScrollRef = useRef<HTMLDivElement | null>(null);
   const p3ScrollRef = useRef<HTMLDivElement | null>(null);
 
   // Layer 2: mouse parallax
-  const p1MouseRef  = useRef<HTMLDivElement | null>(null);
   const p2MouseRef  = useRef<HTMLDivElement | null>(null);
   const p3MouseRef  = useRef<HTMLDivElement | null>(null);
 
   // Layer 3: continuous float animation
-  const p1FloatRef  = useRef<HTMLDivElement | null>(null);
   const p2FloatRef  = useRef<HTMLDivElement | null>(null);
   const p3FloatRef  = useRef<HTMLDivElement | null>(null);
 
@@ -54,6 +60,7 @@ export const SpaceBg: React.FC = () => {
     let animFrameId: number;
     let stars: Star[] = [];
     let shootingStars: ShootingStar[] = [];
+    let galaxyStars: GalaxyParticle[] = [];
     let width  = (canvas.width  = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
@@ -74,6 +81,63 @@ export const SpaceBg: React.FC = () => {
           twinkleOffset: Math.random() * Math.PI * 2,
           parallaxFactor: layer,
           colorTemp: Math.random(),
+        });
+      }
+    };
+
+    // ── Build Milky Way Galaxy ─────────────────────────────────────────
+    const buildGalaxy = () => {
+      galaxyStars = [];
+      const numParticles = Math.min(Math.floor((width * height) / 900), 1600);
+      const numArms = 4; // 4-arm spiral (like the Milky Way!)
+      const galaxyColorTemps = [
+        "rgba(255, 140, 255, ", // magenta/purple
+        "rgba(140, 190, 255, ", // light blue
+        "rgba(255, 220, 170, ", // warm golden/core
+        "rgba(255, 255, 255, "  // white
+      ];
+      
+      const maxRadius = Math.min(width, height) * 0.26;
+
+      for (let i = 0; i < numParticles; i++) {
+        let distance = 0;
+        let angle = 0;
+        let colorPrefix = galaxyColorTemps[3]; // default white
+        const randType = Math.random();
+        
+        // Split particles: 20% core stars, 65% arm stars, 15% ambient disk stars
+        if (randType < 0.2) {
+          // 1. Core bulge stars (densely packed center)
+          distance = Math.pow(Math.random(), 2) * maxRadius * 0.18;
+          angle = Math.random() * 2 * Math.PI;
+          colorPrefix = Math.random() > 0.45 ? galaxyColorTemps[2] : galaxyColorTemps[3];
+        } else if (randType < 0.85) {
+          // 2. Main spiral arm stars
+          distance = Math.pow(Math.random(), 1.4) * maxRadius;
+          const arm = i % numArms;
+          const armAngle = (arm * 2 * Math.PI) / numArms;
+          // Moderate dispersion for natural arm thickness
+          const dispersion = (Math.random() - 0.5) * (0.24 + 40 / (distance + 10));
+          angle = armAngle + dispersion;
+          
+          const colorRand = Math.random();
+          if (colorRand < 0.35) colorPrefix = galaxyColorTemps[0]; // magenta/purple
+          else if (colorRand < 0.7) colorPrefix = galaxyColorTemps[1]; // blue
+          else colorPrefix = galaxyColorTemps[3]; // white
+        } else {
+          // 3. Ambient disk stars (fills the gaps between arms with a faint glow)
+          distance = Math.pow(Math.random(), 1.2) * maxRadius;
+          angle = Math.random() * 2 * Math.PI;
+          colorPrefix = Math.random() > 0.5 ? galaxyColorTemps[1] : galaxyColorTemps[3];
+        }
+
+        galaxyStars.push({
+          distance,
+          angle,
+          speed: 0.7 + Math.random() * 0.5,
+          size: 0.35 + Math.random() * 1.8 * (1 - distance / maxRadius),
+          color: colorPrefix,
+          opacity: (randType >= 0.85 ? 0.08 : 0.15) + (1 - distance / maxRadius) * 0.85,
         });
       }
     };
@@ -100,6 +164,7 @@ export const SpaceBg: React.FC = () => {
       width  = canvas.width  = window.innerWidth;
       height = canvas.height = window.innerHeight;
       buildStars();
+      buildGalaxy();
     };
     window.addEventListener('resize', handleResize);
 
@@ -110,6 +175,7 @@ export const SpaceBg: React.FC = () => {
     window.addEventListener('mousemove', handleMouseMove);
 
     buildStars();
+    buildGalaxy();
 
     const starColor = (temp: number, alpha: number) => {
       if (temp < 0.25)  return `rgba(160,185,255,${alpha.toFixed(3)})`;
@@ -154,6 +220,80 @@ export const SpaceBg: React.FC = () => {
         ctx.fill();
       });
 
+      // ── Draw Milky Way Galaxy ───────────────────────────────────────
+      // Center of the galaxy has scroll parallax (deep-space slow drift) and mouse parallax
+      const gcx = width * 0.82 + mx * 0.35 - (window.scrollY * 0.02);
+      const gcy = height * 0.18 + my * 0.35 - (window.scrollY * 0.06);
+
+      // 1. Draw core glow
+      const coreGrd = ctx.createRadialGradient(gcx, gcy, 0, gcx, gcy, Math.min(width, height) * 0.1);
+      coreGrd.addColorStop(0, 'rgba(255, 220, 170, 0.35)'); // warm golden glow
+      coreGrd.addColorStop(0.35, 'rgba(255, 140, 255, 0.12)'); // purple glow
+      coreGrd.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.beginPath();
+      ctx.arc(gcx, gcy, Math.min(width, height) * 0.1, 0, Math.PI * 2);
+      ctx.fillStyle = coreGrd;
+      ctx.fill();
+
+      // 1.5 Draw swirling gas clouds (nebula arms)
+      const numNebulae = 4;
+      const nebulaColors = [
+        "rgba(255, 100, 255, 0.025)", // magenta
+        "rgba(100, 150, 255, 0.025)", // blue
+        "rgba(255, 180, 100, 0.02)",  // gold
+        "rgba(180, 100, 255, 0.025)"  // purple
+      ];
+      for (let i = 0; i < numNebulae; i++) {
+        // Slow gas arm rotation (0.1 rad/sec)
+        const nebAngle = t * 0.1 + (i * Math.PI) / 2;
+        const nebDist = Math.min(width, height) * 0.08;
+        const nebX = gcx + Math.cos(nebAngle) * nebDist;
+        const nebY = gcy + Math.sin(nebAngle) * nebDist * 0.35; // follow the same tilt
+        
+        const nebGrd = ctx.createRadialGradient(nebX, nebY, 0, nebX, nebY, Math.min(width, height) * 0.2);
+        nebGrd.addColorStop(0, nebulaColors[i]);
+        nebGrd.addColorStop(1, 'rgba(0,0,0,0)');
+        
+        ctx.beginPath();
+        ctx.arc(nebX, nebY, Math.min(width, height) * 0.2, 0, Math.PI * 2);
+        ctx.fillStyle = nebGrd;
+        ctx.fill();
+      }
+
+      // 2. Draw galaxy particles
+      // Rotate the entire spiral system as one structure at a smooth visible rate (0.2 rad/sec)
+      const baseRotationSpeed = 0.2; 
+      
+      galaxyStars.forEach((gs) => {
+        const spiralFactor = 0.012; // tightness of the arms
+        
+        // Calculate the current angle: static base angle + spiral arm twist + global rotation
+        // Using a uniform rotation speed keeps the spiral arm structure intact forever
+        const angle = gs.angle + gs.distance * spiralFactor + t * baseRotationSpeed;
+
+        const tiltFactor = 0.35; // compress Y for 3D tilted disk effect
+        const galaxyRotation = -0.4; // rotation of the galaxy disk on the screen
+
+        const cosRot = Math.cos(galaxyRotation);
+        const sinRot = Math.sin(galaxyRotation);
+
+        const rawX = gs.distance * Math.cos(angle);
+        const rawY = gs.distance * Math.sin(angle) * tiltFactor;
+
+        // Apply tilt and rotation
+        const px = gcx + (rawX * cosRot - rawY * sinRot);
+        const py = gcy + (rawX * sinRot + rawY * cosRot);
+
+        // Twinkle factor
+        const tw = Math.sin(t * 1.5 + gs.distance * 0.1);
+        const alpha = Math.max(0.05, Math.min(1, gs.opacity + tw * 0.15));
+
+        ctx.beginPath();
+        ctx.arc(px, py, gs.size, 0, Math.PI * 2);
+        ctx.fillStyle = `${gs.color}${alpha.toFixed(3)})`;
+        ctx.fill();
+      });
+
       shootingStarTimer++;
       if (shootingStarTimer >= INTERVAL) { shootingStarTimer = 0; spawnShootingStar(); }
       shootingStars = shootingStars.filter((ss) => ss.active);
@@ -190,7 +330,6 @@ export const SpaceBg: React.FC = () => {
 
     // ── Layer 3: GSAP float on inner wrappers (never conflicts) ──────
     [
-      { ref: p1FloatRef, y: 26, x: 8,  dur: 6.2 },
       { ref: p2FloatRef, y: 18, x: -6, dur: 4.6 },
       { ref: p3FloatRef, y: 12, x: 4,  dur: 8.8 },
     ].forEach(({ ref, y, x, dur }) => {
@@ -214,18 +353,6 @@ export const SpaceBg: React.FC = () => {
       );
 
     // ── Layer 1: Scroll movement — clean scrubbed timelines ───────────
-    // Planet 1 (gas giant, top-right): drifts left & slightly down
-    gsap.to(p1ScrollRef.current, {
-      x: -140, y: 90,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: document.body,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 2,
-      },
-    });
-
     // Planet 2 (ice, bottom-left): rises and drifts right
     gsap.to(p2ScrollRef.current, {
       x: 90, y: -130,
@@ -251,8 +378,8 @@ export const SpaceBg: React.FC = () => {
     });
 
     // ── Layer 2: Mouse parallax on middle wrappers ────────────────────
-    const mouseRefs  = [p1MouseRef,  p2MouseRef,  p3MouseRef];
-    const depths     = [-20, 14, -28];
+    const mouseRefs  = [p2MouseRef,  p3MouseRef];
+    const depths     = [14, -28];
 
     const handlePlanetParallax = (e: MouseEvent) => {
       const rx = e.clientX / window.innerWidth  - 0.5;
@@ -276,7 +403,7 @@ export const SpaceBg: React.FC = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mousemove', handlePlanetParallax);
       ScrollTrigger.getAll().forEach((st) => st.kill());
-      [p1FloatRef, p2FloatRef, p3FloatRef].forEach(({ current }) => { if (current) gsap.killTweensOf(current); });
+      [p2FloatRef, p3FloatRef].forEach(({ current }) => { if (current) gsap.killTweensOf(current); });
       mouseRefs.forEach(({ current }) => { if (current) gsap.killTweensOf(current); });
       if (nebula1Ref.current) gsap.killTweensOf(nebula1Ref.current);
       if (nebula2Ref.current) gsap.killTweensOf(nebula2Ref.current);
@@ -288,20 +415,6 @@ export const SpaceBg: React.FC = () => {
       <canvas ref={canvasRef} className="space-canvas" />
       <div ref={nebula1Ref} className="nebula nebula-1" />
       <div ref={nebula2Ref} className="nebula nebula-2" />
-
-      {/* Planet 1 – Ringed Gas Giant (top-right) */}
-      {/* Layer 1: scroll */}
-      <div ref={p1ScrollRef} className="planet planet-1">
-        {/* Layer 2: mouse */}
-        <div ref={p1MouseRef} className="planet-layer">
-          {/* Layer 3: float */}
-          <div ref={p1FloatRef} className="planet-layer">
-            <div className="planet-body planet-1-body" />
-            <div className="planet-ring planet-1-ring" />
-            <div className="planet-glow planet-1-glow" />
-          </div>
-        </div>
-      </div>
 
       {/* Planet 2 – Ice/Ocean Planet (bottom-left) */}
       <div ref={p2ScrollRef} className="planet planet-2">
