@@ -11,41 +11,55 @@ export const Hero: React.FC = () => {
 
     const ctx = gsap.context(() => {
       const timeline = gsap.timeline();
-      
-      timeline.fromTo(
-        '.socials-container a',
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' }
-      )
-      .fromTo(
-        'h1',
-        { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-        '-=0.3'
-      )
-      .fromTo(
-        'p',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-        '-=0.4'
-      )
-      .fromTo(
-        '.hero-ctas-container a',
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' },
-        '-=0.4'
-      );
+
+      timeline
+        .fromTo(
+          ".socials-container a",
+          { opacity: 0, y: 15 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: "power2.out",
+          },
+        )
+        .fromTo(
+          "h1",
+          { opacity: 0, y: 25 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          "-=0.3",
+        )
+        .fromTo(
+          "p",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          "-=0.4",
+        )
+        .fromTo(
+          ".hero-ctas-container a",
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" },
+          "-=0.4",
+        );
 
       gsap.fromTo(
-        '.hero-avatar-container img',
+        ".hero-avatar-container img",
         { opacity: 0, scale: 0.92 },
-        { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out', delay: 0.2 }
+        { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out", delay: 0.2 },
       );
 
       gsap.fromTo(
-        '.floating-badge',
+        ".floating-badge",
         { opacity: 0, scale: 0 },
-        { opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.7)', delay: 0.5 }
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.12,
+          ease: "back.out(1.7)",
+          delay: 0.5,
+        },
       );
     }, containerRef);
 
@@ -58,7 +72,16 @@ export const Hero: React.FC = () => {
       url: "https://www.instagram.com/aman_0124k/",
       bg: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
       icon: (
-        <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <svg
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          viewBox="0 0 24 24"
+        >
           <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
           <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -70,7 +93,16 @@ export const Hero: React.FC = () => {
       url: "https://github.com/aman123k",
       bg: "#24292e",
       icon: (
-        <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <svg
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          viewBox="0 0 24 24"
+        >
           <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
           <path d="M9 18c-4.51 2-5-2-7-2" />
         </svg>
@@ -81,7 +113,16 @@ export const Hero: React.FC = () => {
       url: "https://www.linkedin.com/in/sudeesh-kumar-a1a1b4260/",
       bg: "#0077b5",
       icon: (
-        <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <svg
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          viewBox="0 0 24 24"
+        >
           <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
           <rect width="4" height="12" x="2" y="9" />
           <circle cx="4" cy="4" r="2" />
@@ -93,7 +134,16 @@ export const Hero: React.FC = () => {
       url: "https://x.com/Sudeesh76639641",
       bg: "#000000",
       icon: (
-        <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <svg
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          viewBox="0 0 24 24"
+        >
           <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
           <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
         </svg>
@@ -209,8 +259,9 @@ export const Hero: React.FC = () => {
             opacity: 0.9,
           }}
         >
-          Full Stack Engineer at The Gold Technologies. I build production SaaS platforms,
-          CMS-driven sites, and real-time apps using React, Next.js, Node.js, and TypeScript.
+          Full Stack Engineer at The Gold Technologies. I build production SaaS
+          platforms, CMS-driven sites, and real-time apps using React, Next.js,
+          Node.js, and TypeScript.
         </p>
 
         {/* CTAs */}

@@ -5,7 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
 export const Contact: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -51,7 +50,9 @@ export const Contact: React.FC = () => {
   const emailAddress = "sude8920esh@gmail.com";
 
   // Web3Forms Access Key loaded from environment
-  const WEB3FORMS_ACCESS_KEY = (import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string) || "YOUR_ACCESS_KEY_HERE";
+  const WEB3FORMS_ACCESS_KEY =
+    (import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string) ||
+    "YOUR_ACCESS_KEY_HERE";
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -63,8 +64,13 @@ export const Contact: React.FC = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    if (WEB3FORMS_ACCESS_KEY === "YOUR_ACCESS_KEY_HERE" || !WEB3FORMS_ACCESS_KEY) {
-      console.warn("Web3Forms Access Key is not configured. Simulating successful form submission.");
+    if (
+      WEB3FORMS_ACCESS_KEY === "YOUR_ACCESS_KEY_HERE" ||
+      !WEB3FORMS_ACCESS_KEY
+    ) {
+      console.warn(
+        "Web3Forms Access Key is not configured. Simulating successful form submission.",
+      );
       setTimeout(() => {
         setSubmitting(false);
         setSubmitted(true);
@@ -83,13 +89,25 @@ export const Contact: React.FC = () => {
     // Submit payload to Web3Forms API
     const formDataObj = new FormData();
     formDataObj.append("access_key", WEB3FORMS_ACCESS_KEY);
-    formDataObj.append("from_name", `${formData.firstName} ${formData.lastName} (via Website)`);
-    formDataObj.append("subject", `A new person is trying to hire or contact you through your website!`);
+    formDataObj.append(
+      "from_name",
+      `${formData.firstName} ${formData.lastName} (via Website)`,
+    );
+    formDataObj.append(
+      "subject",
+      `A new person is trying to hire or contact you through your website!`,
+    );
     formDataObj.append("replyto", formData.email);
 
     // Custom formatted fields for structured display in your email body
-    formDataObj.append("Notice", "A new person is trying to hire you or talk with you through your website.");
-    formDataObj.append("Sender Name", `${formData.firstName} ${formData.lastName}`);
+    formDataObj.append(
+      "Notice",
+      "A new person is trying to hire you or talk with you through your website.",
+    );
+    formDataObj.append(
+      "Sender Name",
+      `${formData.firstName} ${formData.lastName}`,
+    );
     formDataObj.append("Sender Email", formData.email);
     formDataObj.append("Phone Number", formData.phone || "Not provided");
     formDataObj.append("Message", formData.message);

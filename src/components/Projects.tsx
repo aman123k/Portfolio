@@ -23,9 +23,9 @@ export const Projects: React.FC = () => {
   useEffect(() => {
     // Stagger fade-in when filter changes
     gsap.fromTo(
-      '.project-card-container',
+      ".project-card-container",
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' }
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power2.out" },
     );
   }, [filter]);
 
@@ -37,21 +37,20 @@ export const Projects: React.FC = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        }
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
       });
 
       tl.fromTo(
-        ['h2', 'p', 'button'],
+        ["h2", "p", "button"],
         { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }
-      )
-      .fromTo(
-        '.projects-grid',
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power3.out" },
+      ).fromTo(
+        ".projects-grid",
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-        '-=0.4'
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        "-=0.4",
       );
     }, containerRef);
 
@@ -101,17 +100,18 @@ export const Projects: React.FC = () => {
     },
     {
       title: "Pub Club",
-      subtitle: "Company Project",
+      subtitle: "The Gold Technologies",
       desc: "An interactive social guide and event dashboard built with Next.js 15, rich GSAP scroll trigger sequences, Lenis smooth scrolling, and global state management.",
       tech: ["Next.js 15", "GSAP", "Lenis", "Zustand"],
-      github: "https://github.com/the-gold-technologies/seven-star-landing-page",
+      github:
+        "https://github.com/the-gold-technologies/seven-star-landing-page",
       demo: "https://pub-club-mu.vercel.app/",
       image: "/pubclub.png",
       category: "company",
     },
     {
       title: "Arcos Capacitors",
-      subtitle: "Company Project",
+      subtitle: "The Gold Technologies",
       desc: "A premium corporate catalog and landing platform built for an industrial manufacturer, showcasing heavy machinery capacitors with dynamic data tables.",
       tech: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/the-gold-technologies/arcos-capacitors",
@@ -121,7 +121,7 @@ export const Projects: React.FC = () => {
     },
     {
       title: "TGT Partner Page",
-      subtitle: "Company Project",
+      subtitle: "The Gold Technologies",
       desc: "A premium partner landing page and onboarding portal designed to convert leads into active tech partnerships with animated CTA sections.",
       tech: ["Next.js", "TypeScript", "CSS modules", "Vercel"],
       github: "https://github.com/Ayushkush1/TGT-LandingPage",
@@ -131,7 +131,7 @@ export const Projects: React.FC = () => {
     },
     {
       title: "Pub Club CMS",
-      subtitle: "Company Project",
+      subtitle: "The Gold Technologies",
       desc: "A CMS-driven business website with Cloudinary image management, SEO optimization, and live social integration using Meta API.",
       tech: ["Next.js", "Zustand", "Cloudinary", "Meta API"],
       github: "https://github.com/the-gold-technologies/cms-seven-star",
@@ -141,7 +141,7 @@ export const Projects: React.FC = () => {
     },
     {
       title: "SK Jewellers Portal",
-      subtitle: "Company Project",
+      subtitle: "The Gold Technologies",
       desc: "A full-stack business stock catalog portal serving stock catalogs, Branch retail allocations, and super admin operations logs.",
       tech: ["React", "Zustand", "Tailwind", "Directus"],
       github: "https://github.com/the-gold-technologies/jewellers-inventory",
@@ -151,7 +151,7 @@ export const Projects: React.FC = () => {
     },
     {
       title: "Jewellery Landing Page",
-      subtitle: "Company Project",
+      subtitle: "The Gold Technologies",
       desc: "A highly aesthetic, premium product landing page showing dynamic showcase galleries, gold rate calculators, and appointment booking forms.",
       tech: ["Next.js", "React", "Framer Motion", "Tailwind"],
       github: "https://github.com/the-gold-technologies/karatrix-landing-page",
@@ -161,7 +161,7 @@ export const Projects: React.FC = () => {
     },
     {
       title: "Encotech Page",
-      subtitle: "Company Project",
+      subtitle: "The Gold Technologies",
       desc: "A modern engineering corporate showcase site presenting product datasheets, structural project galleries, and contact pipelines.",
       tech: ["Next.js", "Tailwind CSS", "Vercel", "Framer Motion"],
       github: "https://github.com/the-gold-technologies/encotech",
@@ -169,11 +169,31 @@ export const Projects: React.FC = () => {
       image: "/encotech.png",
       category: "company",
     },
+    {
+      title: "KhamBee",
+      subtitle: "Lean Platform Technologies",
+      desc: "A comprehensive website builder and course management SaaS platform enabling creators and educators to launch online academies, manage batches, and sell courses without coding.",
+      tech: ["React", "TypeScript", "Tailwind CSS", "Crisp API"],
+      github: "",
+      demo: "https://khambee.com/",
+      image: "/khambee.png",
+      category: "company",
+    },
+    {
+      title: "Kokalachi",
+      subtitle: "The Gold Technologies",
+      desc: "A premium travel and tourism booking platform featuring destination carousels, customizable tour packages, dynamic search filters, and an interactive reservation workflow.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      github: "https://github.com/the-gold-technologies/kokalachi",
+      demo: "https://kokalachi.vercel.app/",
+      image: "/kokalachi.png",
+      category: "company",
+    },
   ];
 
   // Filter projects list based on active tab
   const filteredProjects = projectList.filter(
-    (project) => filter === "all" || project.category === filter
+    (project) => filter === "all" || project.category === filter,
   );
 
   // Helper to render high-fidelity premium visual mockup headers with screenshot image
@@ -202,9 +222,30 @@ export const Projects: React.FC = () => {
             borderBottom: "1.5px solid var(--border-color)",
           }}
         >
-          <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ff5f56" }} />
-          <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ffbd2e" }} />
-          <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#27c93f" }} />
+          <span
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              background: "#ff5f56",
+            }}
+          />
+          <span
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              background: "#ffbd2e",
+            }}
+          />
+          <span
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              background: "#27c93f",
+            }}
+          />
           <div
             style={{
               marginLeft: "auto",
@@ -226,7 +267,14 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* Screenshot Container */}
-        <div style={{ width: "100%", height: "calc(100% - 28px)", overflow: "hidden", position: "relative" }}>
+        <div
+          style={{
+            width: "100%",
+            height: "calc(100% - 28px)",
+            overflow: "hidden",
+            position: "relative",
+          }}
+        >
           <img
             src={project.image}
             alt={project.title}
@@ -277,7 +325,8 @@ export const Projects: React.FC = () => {
             opacity: 0.85,
           }}
         >
-          Hand-picked projects built in production. Covering multi-tenant SaaS, CMS-driven business sites, and AI-powered apps shipped at real scale.
+          Hand-picked projects built in production. Covering multi-tenant SaaS,
+          CMS-driven business sites, and AI-powered apps shipped at real scale.
         </p>
       </div>
 
@@ -303,12 +352,18 @@ export const Projects: React.FC = () => {
               padding: "10px 22px",
               borderRadius: "100px",
               border: "1.5px solid var(--border-color)",
-              background: filter === tab.id ? "var(--accent-gradient)" : "var(--bg-secondary)",
+              background:
+                filter === tab.id
+                  ? "var(--accent-gradient)"
+                  : "var(--bg-secondary)",
               color: filter === tab.id ? "#ffffff" : "var(--text-main)",
               fontWeight: 700,
               fontSize: "13.5px",
               cursor: "pointer",
-              boxShadow: filter === tab.id ? "var(--shadow-accent)" : "var(--shadow-soft)",
+              boxShadow:
+                filter === tab.id
+                  ? "var(--shadow-accent)"
+                  : "var(--shadow-soft)",
               transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
             }}
           >
@@ -423,34 +478,36 @@ export const Projects: React.FC = () => {
                   gap: "12px",
                 }}
               >
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    flex: 1,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "6px",
-                    background: "var(--bg-secondary)",
-                    border: "1.5px solid var(--accent-primary)",
-                    borderRadius: "100px",
-                    padding: "8px 16px",
-                    fontSize: "13px",
-                    fontWeight: 700,
-                    color: "var(--accent-primary)",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "var(--accent-light)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "var(--bg-secondary)";
-                  }}
-                >
-                  <Code2 size={14} /> Code
-                </a>
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      flex: 1,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "6px",
+                      background: "var(--bg-secondary)",
+                      border: "1.5px solid var(--accent-primary)",
+                      borderRadius: "100px",
+                      padding: "8px 16px",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      color: "var(--accent-primary)",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = "var(--accent-light)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "var(--bg-secondary)";
+                    }}
+                  >
+                    <Code2 size={14} /> Code
+                  </a>
+                )}
                 <a
                   href={project.demo}
                   target="_blank"
@@ -472,7 +529,8 @@ export const Projects: React.FC = () => {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateY(-1px)";
-                    e.currentTarget.style.boxShadow = "0 6px 12px rgba(255, 122, 0, 0.3)";
+                    e.currentTarget.style.boxShadow =
+                      "0 6px 12px rgba(255, 122, 0, 0.3)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "none";
@@ -505,7 +563,8 @@ export const Projects: React.FC = () => {
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = "translateY(-2px)";
-            e.currentTarget.style.boxShadow = "0 12px 24px rgba(255, 122, 0, 0.35)";
+            e.currentTarget.style.boxShadow =
+              "0 12px 24px rgba(255, 122, 0, 0.35)";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = "none";

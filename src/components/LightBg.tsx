@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export const LightBg: React.FC = () => {
   const sunRef = useRef<HTMLDivElement | null>(null);
@@ -18,7 +18,7 @@ export const LightBg: React.FC = () => {
     if (!sun) return;
 
     // Set initial GSAP states
-    gsap.set(sun, { x: '0vw', y: '0vh', scale: 1 });
+    gsap.set(sun, { x: "0vw", y: "0vh", scale: 1 });
     if (sunsetCore) gsap.set(sunsetCore, { opacity: 0 });
     if (sunsetGlow) gsap.set(sunsetGlow, { opacity: 0 });
 
@@ -28,32 +28,35 @@ export const LightBg: React.FC = () => {
     // 100% Scroll (Contact/Footer): Settles behind footer content (-45vw, 80vh)
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: 'body',
-        start: 'top top',
-        end: 'bottom bottom',
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
         scrub: 1.5, // smooth scrubbing with a delay for elegance
-      }
+      },
     });
 
     tl.to(sun, {
-      x: '-22vw',
-      y: '32vh',
+      x: "-22vw",
+      y: "32vh",
       scale: 1.2,
-      ease: 'power1.inOut',
-    })
-    .to(sun, {
-      x: '-45vw',
-      y: '80vh',
+      ease: "power1.inOut",
+    }).to(sun, {
+      x: "-45vw",
+      y: "80vh",
       scale: 1.1,
-      ease: 'power1.inOut',
+      ease: "power1.inOut",
     });
 
     // Cross-fade the golden core/glow into sunset-coral core/glow as scroll progress approaches footer
     if (sunsetCore && sunsetGlow) {
-      tl.to([sunsetCore, sunsetGlow], {
-        opacity: 1,
-        ease: 'none',
-      }, 0); // Spans across the entire scroll timeline
+      tl.to(
+        [sunsetCore, sunsetGlow],
+        {
+          opacity: 1,
+          ease: "none",
+        },
+        0,
+      ); // Spans across the entire scroll timeline
     }
 
     // Gentle wave floating motion wrapper
@@ -63,7 +66,7 @@ export const LightBg: React.FC = () => {
       duration: 4.5,
       yoyo: true,
       repeat: -1,
-      ease: 'sine.inOut',
+      ease: "sine.inOut",
     });
 
     // Slow rotation of atmospheric orbit rings to keep the sun alive and premium
@@ -75,21 +78,21 @@ export const LightBg: React.FC = () => {
       rotation: 360,
       duration: 30,
       repeat: -1,
-      ease: 'none',
+      ease: "none",
     });
 
     const r2Tween = gsap.to(r2, {
       rotation: -360,
       duration: 40,
       repeat: -1,
-      ease: 'none',
+      ease: "none",
     });
 
     const r3Tween = gsap.to(r3, {
       rotation: 360,
       duration: 60,
       repeat: -1,
-      ease: 'none',
+      ease: "none",
     });
 
     // Mouse tracking parallax effect for the inner sun system
@@ -103,12 +106,12 @@ export const LightBg: React.FC = () => {
           x: xPercent,
           y: yPercent,
           duration: 0.8,
-          ease: 'power2.out',
+          ease: "power2.out",
         });
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       tl.kill();
@@ -116,7 +119,7 @@ export const LightBg: React.FC = () => {
       r1Tween.kill();
       r2Tween.kill();
       r3Tween.kill();
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
@@ -128,17 +131,21 @@ export const LightBg: React.FC = () => {
       {/* Stylized Sun System */}
       <div className="sun-system" ref={sunRef}>
         {/* Floating wrapper adds organic vertical waving */}
-        <div className="sun-floating-wrapper" ref={floatingRef} style={{ width: '100%', height: '100%' }}>
+        <div
+          className="sun-floating-wrapper"
+          ref={floatingRef}
+          style={{ width: "100%", height: "100%" }}
+        >
           {/* Interactive wrapper responds to mouse movement */}
-          <div 
-            ref={interactiveRef} 
-            style={{ 
-              width: '100%', 
-              height: '100%', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              position: 'relative' 
+          <div
+            ref={interactiveRef}
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
             }}
           >
             {/* Soft atmospheric glow: Gold */}

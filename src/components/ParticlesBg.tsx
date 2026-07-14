@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
 interface Particle {
   x: number;
@@ -17,7 +17,7 @@ export const ParticlesBg: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -28,7 +28,7 @@ export const ParticlesBg: React.FC = () => {
     const initParticles = () => {
       particles = [];
       const particleCount = Math.min(Math.floor((width * height) / 18000), 80);
-      
+
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * width,
@@ -36,7 +36,10 @@ export const ParticlesBg: React.FC = () => {
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.4,
           radius: Math.random() * 2 + 1,
-          color: Math.random() > 0.5 ? 'rgba(0, 229, 255, 0.4)' : 'rgba(157, 78, 221, 0.4)',
+          color:
+            Math.random() > 0.5
+              ? "rgba(0, 229, 255, 0.4)"
+              : "rgba(157, 78, 221, 0.4)",
         });
       }
     };
@@ -58,9 +61,9 @@ export const ParticlesBg: React.FC = () => {
       mouseRef.current.active = false;
     };
 
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseleave", handleMouseLeave);
 
     initParticles();
 
@@ -118,12 +121,16 @@ export const ParticlesBg: React.FC = () => {
     draw();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
-  return <div className="canvas-container"><canvas ref={canvasRef} /></div>;
+  return (
+    <div className="canvas-container">
+      <canvas ref={canvasRef} />
+    </div>
+  );
 };

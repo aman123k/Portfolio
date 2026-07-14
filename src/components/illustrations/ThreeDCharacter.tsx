@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import React, { useEffect, useRef } from "react";
+import * as THREE from "three";
 
 interface ThreeDCharacterProps {
-  pose: 'hero' | 'about' | 'contact';
+  pose: "hero" | "about" | "contact";
 }
 
 export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
@@ -16,7 +16,7 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
     const height = containerRef.current.clientHeight || 450;
 
     const scene = new THREE.Scene();
-    
+
     // Transparent background so it fits any page bg
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
     camera.position.set(0, 0, 8.5);
@@ -190,7 +190,10 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
 
     // MOUTH (Happy smile line)
     const mouthGeo = new THREE.TorusGeometry(0.08, 0.02, 8, 16, Math.PI);
-    const mouth = new THREE.Mesh(mouthGeo, new THREE.MeshBasicMaterial({ color: 0x993333 }));
+    const mouth = new THREE.Mesh(
+      mouthGeo,
+      new THREE.MeshBasicMaterial({ color: 0x993333 }),
+    );
     mouth.rotation.x = Math.PI;
     mouth.rotation.z = Math.PI;
     mouth.position.set(0, -0.22, 0.64);
@@ -224,9 +227,9 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
     const leftArmGroup = new THREE.Group();
     const rightArmGroup = new THREE.Group();
 
-    if (pose === 'hero') {
+    if (pose === "hero") {
       // --- HERO POSE: Sitting/Holding Laptop ---
-      
+
       // Left Arm
       const armGeoL = new THREE.CylinderGeometry(0.15, 0.12, 0.8, 16);
       const armL = new THREE.Mesh(armGeoL, orangeMat);
@@ -235,7 +238,7 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
       leftArmGroup.position.set(-0.7, 0.4, 0.1);
       leftArmGroup.rotation.z = Math.PI / 4;
       leftArmGroup.rotation.x = -Math.PI / 6;
-      
+
       // Hand Left
       const handGeo = new THREE.SphereGeometry(0.1, 16, 16);
       const handL = new THREE.Mesh(handGeo, skinMat);
@@ -297,20 +300,33 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
 
       // React Badge
       const reactBadgeGeo = new THREE.TorusGeometry(0.2, 0.015, 8, 16);
-      const reactBadge = new THREE.Mesh(reactBadgeGeo, new THREE.MeshStandardMaterial({ color: 0x61dafb, emissive: 0x00d2ff, emissiveIntensity: 0.5 }));
+      const reactBadge = new THREE.Mesh(
+        reactBadgeGeo,
+        new THREE.MeshStandardMaterial({
+          color: 0x61dafb,
+          emissive: 0x00d2ff,
+          emissiveIntensity: 0.5,
+        }),
+      );
       reactBadge.position.set(1.5, 1.2, 0.5);
       badgeGroup.add(reactBadge);
 
       // JS Badge
       const jsBadgeGeo = new THREE.BoxGeometry(0.3, 0.3, 0.05);
-      const jsBadge = new THREE.Mesh(jsBadgeGeo, new THREE.MeshStandardMaterial({ color: 0xf7df1e, roughness: 0.1 }));
+      const jsBadge = new THREE.Mesh(
+        jsBadgeGeo,
+        new THREE.MeshStandardMaterial({ color: 0xf7df1e, roughness: 0.1 }),
+      );
       jsBadge.position.set(-1.4, 1.0, 0.8);
       jsBadge.rotation.set(0.2, 0.5, 0.1);
       badgeGroup.add(jsBadge);
 
       // Python Badge
       const pyBadgeGeo = new THREE.SphereGeometry(0.18, 16, 16);
-      const pyBadge = new THREE.Mesh(pyBadgeGeo, new THREE.MeshStandardMaterial({ color: 0x3776ab, roughness: 0.2 }));
+      const pyBadge = new THREE.Mesh(
+        pyBadgeGeo,
+        new THREE.MeshStandardMaterial({ color: 0x3776ab, roughness: 0.2 }),
+      );
       pyBadge.position.set(1.3, -0.5, 0.6);
       badgeGroup.add(pyBadge);
 
@@ -329,10 +345,9 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
       };
 
       (scene as any).customAnimate = animateHeroBadges;
-
-    } else if (pose === 'about') {
+    } else if (pose === "about") {
       // --- ABOUT POSE: Standing, holding tablet, toolbelt ---
-      
+
       // Legs
       const legGeo = new THREE.CylinderGeometry(0.14, 0.14, 1.0, 16);
       const leftLeg = new THREE.Mesh(legGeo, darkMat);
@@ -354,7 +369,10 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
 
       // Tool Belt (brown loop around waist)
       const beltGeo = new THREE.TorusGeometry(0.58, 0.06, 8, 24);
-      const beltMat = new THREE.MeshStandardMaterial({ color: 0x5c4033, roughness: 0.9 });
+      const beltMat = new THREE.MeshStandardMaterial({
+        color: 0x5c4033,
+        roughness: 0.9,
+      });
       const belt = new THREE.Mesh(beltGeo, beltMat);
       belt.rotation.x = Math.PI / 2;
       belt.position.y = -0.68;
@@ -434,8 +452,7 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
         starGroup.position.y = 0.5 + Math.sin(t) * 0.1;
       };
       (scene as any).customAnimate = animateAboutStar;
-
-    } else if (pose === 'contact') {
+    } else if (pose === "contact") {
       // --- CONTACT POSE: Talking on phone ---
 
       // Left Arm resting at side
@@ -457,7 +474,7 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
       armR1.position.y = -0.3;
       rightArmGroup.add(armR1);
       rightArmGroup.position.set(0.68, 0.4, 0);
-      
+
       // Upper arm rotation
       rightArmGroup.rotation.z = -Math.PI / 4;
       rightArmGroup.rotation.x = -Math.PI / 3;
@@ -490,7 +507,10 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
 
       // Envelope body
       const envBodyGeo = new THREE.BoxGeometry(0.7, 0.46, 0.06);
-      const envMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2 });
+      const envMat = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        roughness: 0.2,
+      });
       const envBody = new THREE.Mesh(envBodyGeo, envMat);
       envBody.castShadow = true;
       envelopeGroup.add(envBody);
@@ -523,7 +543,7 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
     // --- 5. Render & Animation Loop ---
     let animationFrameId: number;
     let time = 0;
-    
+
     // Track mouse coordinates for interactive look-at parallax
     const mouse = { x: 0, y: 0 };
     const targetMouse = { x: 0, y: 0 };
@@ -531,7 +551,7 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
     const handleMouseMove = (e: MouseEvent) => {
       const rect = containerRef.current?.getBoundingClientRect();
       if (!rect) return;
-      
+
       // Normalize mouse coordinates relative to container center
       const clientX = e.clientX - rect.left;
       const clientY = e.clientY - rect.top;
@@ -539,14 +559,14 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
       targetMouse.y = -(clientY / rect.height) * 2 + 1;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     const animate = () => {
       time += 0.015;
 
       // Idle float animation
       charGroup.position.y = Math.sin(time) * 0.12;
-      
+
       // Interpolate mouse movement for smooth delay parallax
       mouse.x += (targetMouse.x - mouse.x) * 0.08;
       mouse.y += (targetMouse.y - mouse.y) * 0.08;
@@ -576,12 +596,12 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
       renderer.setSize(w, h);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // --- 7. Cleanup ---
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
 
       if (containerRef.current && renderer.domElement) {
@@ -607,10 +627,10 @@ export const ThreeDCharacter: React.FC<ThreeDCharacterProps> = ({ pose }) => {
     <div
       ref={containerRef}
       style={{
-        width: '100%',
-        height: '100%',
-        position: 'relative',
-        cursor: 'grab',
+        width: "100%",
+        height: "100%",
+        position: "relative",
+        cursor: "grab",
       }}
     />
   );

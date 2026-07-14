@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { ArrowUp, Mail } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef } from "react";
+import { ArrowUp, Mail } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,12 +73,7 @@ const XIcon: React.FC<{ size?: number }> = ({ size = 18 }) => (
 );
 
 const Leetcode: React.FC<{ size?: number }> = ({ size = 18 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
     <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414 0-1.954l-2.396-2.392c-.742-.741-1.696-.639-2.443.088l-1.127 1.128c-.54.54-1.414.54-1.954 0-.54-.54-.54-1.414 0-1.954l1.127-1.128c1.373-1.373 3.407-1.745 5.22-.647 1.813 1.099 2.653 3.033 2.053 4.885-.599 1.852-2.305 3.097-4.223 3.097H8.537c-.752 0-1.363.611-1.363 1.364 0 .753.611 1.364 1.363 1.364h7.054c2.612 0 4.939-1.695 5.753-4.214.814-2.519-.102-5.32-2.285-6.848-2.183-1.528-5.051-1.554-7.265-.052l-.039-.038L14.444 1.35C14.855.776 14.364 0 13.483 0z" />
   </svg>
 );
@@ -89,7 +84,7 @@ export const Footer: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
@@ -98,26 +93,26 @@ export const Footer: React.FC = () => {
     if (!footer) return;
 
     // Entrance animation for footer elements
-    const columns = footer.querySelectorAll('.footer-col');
-    const bottomBar = footer.querySelector('.footer-bottom');
+    const columns = footer.querySelectorAll(".footer-col");
+    const bottomBar = footer.querySelector(".footer-bottom");
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: footer,
-        start: 'top 92%', // triggers when the top of footer is 92% down from viewport top
-        toggleActions: 'play none none none',
-      }
+        start: "top 92%", // triggers when the top of footer is 92% down from viewport top
+        toggleActions: "play none none none",
+      },
     });
 
     tl.fromTo(
       columns,
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out' }
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: "power3.out" },
     ).fromTo(
       bottomBar,
       { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-      '-=0.4'
+      { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+      "-=0.4",
     );
 
     return () => {
@@ -130,71 +125,96 @@ export const Footer: React.FC = () => {
   }, []);
 
   const socialLinks = [
-    { name: 'Instagram', url: 'https://www.instagram.com/aman_0124k/', icon: <Instagram size={18} /> },
-    { name: 'GitHub', url: 'https://github.com/aman123k', icon: <Github size={18} /> },
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/sudeesh-kumar-a1a1b4260/', icon: <Linkedin size={18} /> },
-    { name: 'X', url: 'https://x.com/Sudeesh76639641', icon: <XIcon size={18} /> },
-    { name: 'LeetCode', url: 'https://leetcode.com/u/sudeesh123k/', icon: <Leetcode size={18} /> },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/aman_0124k/",
+      icon: <Instagram size={18} />,
+    },
+    {
+      name: "GitHub",
+      url: "https://github.com/aman123k",
+      icon: <Github size={18} />,
+    },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/sudeesh-kumar-a1a1b4260/",
+      icon: <Linkedin size={18} />,
+    },
+    {
+      name: "X",
+      url: "https://x.com/Sudeesh76639641",
+      icon: <XIcon size={18} />,
+    },
+    {
+      name: "LeetCode",
+      url: "https://leetcode.com/u/sudeesh123k/",
+      icon: <Leetcode size={18} />,
+    },
   ];
 
   const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
     <footer
       ref={footerRef}
       style={{
-        background: 'transparent', // optimized background transparency to let sun/glow flow behind it
-        borderTop: '1.5px solid var(--border-color)',
-        paddingTop: '64px',
-        paddingBottom: '32px',
-        position: 'relative',
+        background: "transparent", // optimized background transparency to let sun/glow flow behind it
+        borderTop: "1.5px solid var(--border-color)",
+        paddingTop: "64px",
+        paddingBottom: "32px",
+        position: "relative",
         zIndex: 10,
-        marginTop: '80px',
+        marginTop: "80px",
       }}
     >
       <div
         className="section"
         style={{
-          display: 'grid',
-          gridTemplateColumns: '1.5fr 1fr 1fr',
-          gap: '48px',
-          marginBottom: '48px',
-          textAlign: 'left',
+          display: "grid",
+          gridTemplateColumns: "1.5fr 1fr 1fr",
+          gap: "48px",
+          marginBottom: "48px",
+          textAlign: "left",
         }}
         id="footer-grid"
       >
         {/* Column 1: Brand & Tagline */}
-        <div className="footer-col" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div
+          className="footer-col"
+          style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+        >
           <h3
             style={{
-              fontSize: '24px',
+              fontSize: "24px",
               fontWeight: 900,
-              fontFamily: 'var(--font-heading)',
-              letterSpacing: '-0.5px',
+              fontFamily: "var(--font-heading)",
+              letterSpacing: "-0.5px",
             }}
           >
             Sudeesh Kumar<span className="text-gradient">.</span>
           </h3>
           <p
             style={{
-              fontSize: '14.5px',
-              color: 'var(--text-main)',
+              fontSize: "14.5px",
+              color: "var(--text-main)",
               lineHeight: 1.6,
               opacity: 0.85,
-              maxWidth: '320px',
+              maxWidth: "320px",
             }}
           >
-            Full Stack Engineer building real-world SaaS platforms, CMS products, and interactive web experiences. Focused on performance, clean architecture, and pixel-perfect UIs.
+            Full Stack Engineer building real-world SaaS platforms, CMS
+            products, and interactive web experiences. Focused on performance,
+            clean architecture, and pixel-perfect UIs.
           </p>
           {/* Social Icons */}
-          <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+          <div style={{ display: "flex", gap: "12px", marginTop: "8px" }}>
             {socialLinks.map((social) => (
               <a
                 key={social.name}
@@ -203,24 +223,24 @@ export const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="magnetic" // Magnetic behavior enabled
                 style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '8px',
-                  background: 'var(--bg-tertiary)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-highlight)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'color 0.25s ease, border-color 0.25s ease',
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "8px",
+                  background: "var(--bg-tertiary)",
+                  border: "1px solid var(--border-color)",
+                  color: "var(--text-highlight)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "color 0.25s ease, border-color 0.25s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--accent-primary)';
-                  e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                  e.currentTarget.style.color = "var(--accent-primary)";
+                  e.currentTarget.style.borderColor = "var(--accent-primary)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--text-highlight)';
-                  e.currentTarget.style.borderColor = 'var(--border-color)';
+                  e.currentTarget.style.color = "var(--text-highlight)";
+                  e.currentTarget.style.borderColor = "var(--border-color)";
                 }}
                 aria-label={social.name}
               >
@@ -231,32 +251,46 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Column 2: Navigation Links */}
-        <div className="footer-col" style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+        <div
+          className="footer-col"
+          style={{ display: "flex", flexDirection: "column", gap: "18px" }}
+        >
           <h4
             style={{
-              fontSize: '14px',
+              fontSize: "14px",
               fontWeight: 800,
-              color: 'var(--text-highlight)',
-              textTransform: 'uppercase',
-              letterSpacing: '1px',
+              color: "var(--text-highlight)",
+              textTransform: "uppercase",
+              letterSpacing: "1px",
             }}
           >
             Navigation
           </h4>
-          <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <ul
+            style={{
+              listStyle: "none",
+              display: "flex",
+              flexDirection: "column",
+              gap: "12px",
+            }}
+          >
             {quickLinks.map((link) => (
               <li key={link.name}>
                 <a
                   href={link.href}
                   style={{
-                    fontSize: '14px',
-                    color: 'var(--text-main)',
-                    textDecoration: 'none',
-                    transition: 'color 0.2s ease',
+                    fontSize: "14px",
+                    color: "var(--text-main)",
+                    textDecoration: "none",
+                    transition: "color 0.2s ease",
                     opacity: 0.9,
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-primary)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-main)')}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "var(--accent-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "var(--text-main)")
+                  }
                 >
                   {link.name}
                 </a>
@@ -266,63 +300,99 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Column 3: Contact Info */}
-        <div className="footer-col" style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+        <div
+          className="footer-col"
+          style={{ display: "flex", flexDirection: "column", gap: "18px" }}
+        >
           <h4
             style={{
-              fontSize: '14px',
+              fontSize: "14px",
               fontWeight: 800,
-              color: 'var(--text-highlight)',
-              textTransform: 'uppercase',
-              letterSpacing: '1px',
+              color: "var(--text-highlight)",
+              textTransform: "uppercase",
+              letterSpacing: "1px",
             }}
           >
             Contact
           </h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', fontSize: '14px', color: 'var(--text-main)' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.5px' }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+              fontSize: "14px",
+              color: "var(--text-main)",
+            }}
+          >
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+            >
+              <span
+                style={{
+                  fontSize: "11px",
+                  textTransform: "uppercase",
+                  color: "var(--text-muted)",
+                  fontWeight: 700,
+                  letterSpacing: "0.5px",
+                }}
+              >
                 Email Me
               </span>
-              <p style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-                <Mail size={16} style={{ color: 'var(--accent-primary)' }} />
+              <p
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  margin: 0,
+                }}
+              >
+                <Mail size={16} style={{ color: "var(--accent-primary)" }} />
                 <a
                   href="mailto:sude8920esh@gmail.com"
-                  style={{ color: 'inherit', textDecoration: 'none', fontWeight: 600 }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-primary)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'inherit')}
+                  style={{
+                    color: "inherit",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "var(--accent-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "inherit")
+                  }
                 >
                   sude8920esh@gmail.com
                 </a>
               </p>
             </div>
-            
+
             {/* Scroll to Top Button */}
             <button
               onClick={scrollToTop}
               className="magnetic" // Magnetic behavior enabled
               style={{
-                alignSelf: 'flex-start',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                background: 'var(--bg-tertiary)',
-                border: '1.5px solid var(--border-color)',
-                color: 'var(--text-highlight)',
-                fontSize: '12px',
+                alignSelf: "flex-start",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                background: "var(--bg-tertiary)",
+                border: "1.5px solid var(--border-color)",
+                color: "var(--text-highlight)",
+                fontSize: "12px",
                 fontWeight: 700,
-                padding: '8px 14px',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                transition: 'color 0.3s ease, border-color 0.3s ease',
-                marginTop: '8px',
+                padding: "8px 14px",
+                borderRadius: "8px",
+                cursor: "pointer",
+                transition: "color 0.3s ease, border-color 0.3s ease",
+                marginTop: "8px",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--accent-primary)';
-                e.currentTarget.style.color = 'var(--accent-primary)';
+                e.currentTarget.style.borderColor = "var(--accent-primary)";
+                e.currentTarget.style.color = "var(--accent-primary)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border-color)';
-                e.currentTarget.style.color = 'var(--text-highlight)';
+                e.currentTarget.style.borderColor = "var(--border-color)";
+                e.currentTarget.style.color = "var(--text-highlight)";
               }}
             >
               Back to Top <ArrowUp size={14} />
@@ -335,19 +405,19 @@ export const Footer: React.FC = () => {
       <div
         className="section footer-bottom"
         style={{
-          borderTop: '1.5px solid var(--border-color)',
-          paddingTop: '32px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '16px',
-          fontSize: '13px',
-          color: 'var(--text-muted)',
+          borderTop: "1.5px solid var(--border-color)",
+          paddingTop: "32px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "16px",
+          fontSize: "13px",
+          color: "var(--text-muted)",
         }}
       >
         <p>© 2026 Sudeesh Kumar. All rights reserved.</p>
-        <p style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+        <p style={{ display: "flex", alignItems: "center", gap: "4px" }}>
           Designed and built with React & 🧡
         </p>
       </div>
