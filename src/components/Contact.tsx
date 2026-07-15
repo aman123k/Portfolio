@@ -184,6 +184,7 @@ export const Contact: React.FC = () => {
             <img
               src="/contact_avatar_man.png"
               alt="Sudeesh Kumar - Contact 3D Avatar"
+              loading="lazy"
               style={{
                 width: "85%",
                 height: "auto",

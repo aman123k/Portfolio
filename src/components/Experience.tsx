@@ -287,6 +287,7 @@ export const Experience: React.FC = () => {
               src="/hero_avatar_man.png"
               alt="Sudeesh Kumar - Developer 3D Avatar"
               className="sidebar-avatar-img"
+              loading="lazy"
             />
           </div>
 

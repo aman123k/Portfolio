@@ -65,7 +65,7 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "TypeScript", "Gemini AI", "Tailwind"],
       github: "https://github.com/aman123k/Lingo",
       demo: "https://lingo-six-roan.vercel.app/",
-      image: "/lingo.png",
+      image: "/lingo.jpg",
       category: "personal",
     },
     {
@@ -75,7 +75,7 @@ export const Projects: React.FC = () => {
       tech: ["React.js", "Tawk.to", "CSS Modules", "Vercel"],
       github: "https://github.com/aman123k/petCares",
       demo: "https://pet-cares.vercel.app/",
-      image: "/petcares.png",
+      image: "/petcares.jpg",
       category: "personal",
     },
     {
@@ -85,7 +85,7 @@ export const Projects: React.FC = () => {
       tech: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
       github: "https://github.com/aman123k",
       demo: "https://bills-splitter-frontend.vercel.app/",
-      image: "/billssplitter.png",
+      image: "/billssplitter.jpg",
       category: "personal",
     },
     {
@@ -95,7 +95,7 @@ export const Projects: React.FC = () => {
       tech: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
       github: "https://github.com/aman123k/recipe",
       demo: "https://recipe-cyan.vercel.app/",
-      image: "/recipe.png",
+      image: "/recipe.jpg",
       category: "personal",
     },
     {
@@ -106,7 +106,7 @@ export const Projects: React.FC = () => {
       github:
         "https://github.com/the-gold-technologies/seven-star-landing-page",
       demo: "https://pub-club-mu.vercel.app/",
-      image: "/pubclub.png",
+      image: "/pubclub.jpg",
       category: "company",
     },
     {
@@ -116,7 +116,7 @@ export const Projects: React.FC = () => {
       tech: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/the-gold-technologies/arcos-capacitors",
       demo: "https://arcos-capacitors.vercel.app/",
-      image: "/arcos.png",
+      image: "/arcos.jpg",
       category: "company",
     },
     {
@@ -126,7 +126,7 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "TypeScript", "CSS modules", "Vercel"],
       github: "https://github.com/Ayushkush1/TGT-LandingPage",
       demo: "https://tgt-landing-page-jade.vercel.app/",
-      image: "/tgt.png",
+      image: "/tgt.jpg",
       category: "company",
     },
     {
@@ -136,7 +136,7 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "Zustand", "Cloudinary", "Meta API"],
       github: "https://github.com/the-gold-technologies/cms-seven-star",
       demo: "https://cms-seven-star.vercel.app/",
-      image: "/sevenstar.png",
+      image: "/sevenstar.jpg",
       category: "company",
     },
     {
@@ -146,7 +146,7 @@ export const Projects: React.FC = () => {
       tech: ["React", "Zustand", "Tailwind", "Directus"],
       github: "https://github.com/the-gold-technologies/jewellers-inventory",
       demo: "https://skjewellers.tgtpartner.com/",
-      image: "/skjewellers.png",
+      image: "/skjewellers.jpg",
       category: "company",
     },
     {
@@ -156,7 +156,7 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "React", "Framer Motion", "Tailwind"],
       github: "https://github.com/the-gold-technologies/karatrix-landing-page",
       demo: "https://jewellery-landing-page-eta.vercel.app/",
-      image: "/jewellery.png",
+      image: "/jewellery.jpg",
       category: "company",
     },
     {
@@ -166,7 +166,7 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "Tailwind CSS", "Vercel", "Framer Motion"],
       github: "https://github.com/the-gold-technologies/encotech",
       demo: "https://encotech-six.vercel.app/",
-      image: "/encotech.png",
+      image: "/encotech.jpg",
       category: "company",
     },
     {
@@ -176,7 +176,7 @@ export const Projects: React.FC = () => {
       tech: ["React", "TypeScript", "Tailwind CSS", "Crisp API"],
       github: "",
       demo: "https://khambee.com/",
-      image: "/khambee.png",
+      image: "/khambee.jpg",
       category: "company",
     },
     {
@@ -186,7 +186,7 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/the-gold-technologies/kokalachi",
       demo: "https://kokalachi.vercel.app/",
-      image: "/kokalachi.png",
+      image: "/kokalachi.jpg",
       category: "company",
     },
   ];
@@ -278,6 +278,7 @@ export const Projects: React.FC = () => {
           <img
             src={project.image}
             alt={project.title}
+            loading="lazy"
             style={{
               width: "100%",
               height: "100%",

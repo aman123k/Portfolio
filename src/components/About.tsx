@@ -90,6 +90,7 @@ export const About: React.FC = () => {
           <img
             src="/about_avatar_man.png"
             alt="Sudeesh Kumar - About 3D Avatar"
+            loading="lazy"
             style={{
               width: "90%",
               height: "auto",

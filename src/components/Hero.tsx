@@ -349,6 +349,8 @@ export const Hero: React.FC = () => {
         <img
           src="/hero_avatar_man.png"
           alt="Sudeesh Kumar - Developer 3D Avatar"
+          loading="eager"
+          fetchPriority="high"
           style={{
             width: "85%",
             height: "auto",
