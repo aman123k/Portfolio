@@ -305,7 +305,7 @@ export const Experience: React.FC = () => {
             </h4>
             <div className="sidebar-stats-list">
               <div className="sidebar-stat-item">
-                <span className="stat-number">2+</span>
+                <span className="stat-number">3+</span>
                 <span className="stat-label">Years of Experience</span>
               </div>
               <div className="sidebar-stat-item">
@@ -313,7 +313,7 @@ export const Experience: React.FC = () => {
                 <span className="stat-label">Tech Companies</span>
               </div>
               <div className="sidebar-stat-item">
-                <span className="stat-number">10+</span>
+                <span className="stat-number">15+</span>
                 <span className="stat-label">Projects Completed</span>
               </div>
             </div>

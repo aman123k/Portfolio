@@ -43,12 +43,12 @@ export const About: React.FC = () => {
       desc: "Certifications & Degrees",
     },
     {
-      value: "2+ Years",
+      value: "3+ Years",
       label: "Experience",
       desc: "Full Stack Development",
     },
     {
-      value: "10+",
+      value: "15+",
       label: "Projects Completed",
       desc: "Production Applications",
     },
@@ -208,7 +208,7 @@ export const About: React.FC = () => {
               opacity: 0.95,
             }}
           >
-            I am a Full Stack Engineer with over 2 years of experience building
+            I am a Full Stack Engineer with over 3 years of experience building
             scalable SaaS applications, CMS platforms, e-commerce solutions, and
             real-time systems. Currently working at The Gold Technologies, where
             I build high-performance modern web architectures using React,
