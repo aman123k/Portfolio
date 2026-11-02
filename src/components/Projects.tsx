@@ -65,7 +65,7 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "TypeScript", "Gemini AI", "Tailwind"],
       github: "https://github.com/aman123k/Lingo",
       demo: "https://lingo-six-roan.vercel.app/",
-      image: "/lingo.jpg",
+      image: "/lingo.webp",
       category: "personal",
     },
     {
@@ -75,7 +75,7 @@ export const Projects: React.FC = () => {
       tech: ["React.js", "Tawk.to", "CSS Modules", "Vercel"],
       github: "https://github.com/aman123k/petCares",
       demo: "https://pet-cares.vercel.app/",
-      image: "/petcares.jpg",
+      image: "/petcares.webp",
       category: "personal",
     },
     {
@@ -85,7 +85,7 @@ export const Projects: React.FC = () => {
       tech: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
       github: "https://github.com/aman123k",
       demo: "https://bills-splitter-frontend.vercel.app/",
-      image: "/billssplitter.jpg",
+      image: "/billssplitter.webp",
       category: "personal",
     },
     {
@@ -95,7 +95,7 @@ export const Projects: React.FC = () => {
       tech: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
       github: "https://github.com/aman123k/recipe",
       demo: "https://recipe-cyan.vercel.app/",
-      image: "/recipe.jpg",
+      image: "/recipe.webp",
       category: "personal",
     },
     {
@@ -106,7 +106,7 @@ export const Projects: React.FC = () => {
       github:
         "https://github.com/the-gold-technologies/seven-star-landing-page",
       demo: "https://sevenstarsatmarshbaldon.co.uk/",
-      image: "/pubclub.jpg",
+      image: "/pubclub.webp",
       category: "company",
     },
     {
@@ -116,7 +116,7 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "Zustand", "Cloudinary", "Meta API"],
       github: "https://github.com/the-gold-technologies/cms-seven-star",
       demo: "https://cms.sevenstarsatmarshbaldon.co.uk/",
-      image: "/sevenstar.jpg",
+      image: "/sevenstar.webp",
       category: "company",
     },
     {
@@ -126,7 +126,7 @@ export const Projects: React.FC = () => {
       tech: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/the-gold-technologies/arcos-capacitors",
       demo: "https://arcosarcos.com/",
-      image: "/arcos.png",
+      image: "/arcos.webp",
       category: "company",
     },
     {
@@ -136,7 +136,17 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "TypeScript", "CSS modules", "Vercel"],
       github: "https://github.com/Ayushkush1/TGT-LandingPage",
       demo: "https://tgt-landing-page-jade.vercel.app/",
-      image: "/tgt.jpg",
+      image: "/tgt.webp",
+      category: "company",
+    },
+    {
+      title: "SK Jewellers",
+      subtitle: "The Gold Technologies",
+      desc: "A luxury jewellery and silverware digital showcase featuring dynamic bridal collections, live gold rate integration, BIS Hallmarked catalog galleries, and consultation booking.",
+      tech: ["Next.js", "React", "Framer Motion", "Tailwind CSS"],
+      github: "https://github.com/the-gold-technologies/sk-jewellers",
+      demo: "https://sk-jewellers-eta.vercel.app/",
+      image: "/skjewellers.webp",
       category: "company",
     },
     {
@@ -146,17 +156,7 @@ export const Projects: React.FC = () => {
       tech: ["React", "Zustand", "Tailwind", "Directus"],
       github: "https://github.com/the-gold-technologies/jewellers-inventory",
       demo: "https://skjewellers.tgtpartner.com/",
-      image: "/skjewellers.jpg",
-      category: "company",
-    },
-    {
-      title: "Jewellery Landing Page",
-      subtitle: "The Gold Technologies",
-      desc: "A highly aesthetic, premium product landing page showing dynamic showcase galleries, gold rate calculators, and appointment booking forms.",
-      tech: ["Next.js", "React", "Framer Motion", "Tailwind"],
-      github: "https://github.com/the-gold-technologies/karatrix-landing-page",
-      demo: "https://jewellery-landing-page-eta.vercel.app/",
-      image: "/jewellery.jpg",
+      image: "/skjewellers-portal.webp",
       category: "company",
     },
     {
@@ -166,7 +166,7 @@ export const Projects: React.FC = () => {
       tech: ["Next.js", "Tailwind CSS", "Vercel", "Framer Motion"],
       github: "https://github.com/the-gold-technologies/encotech",
       demo: "https://encotecenergy.com/",
-      image: "/encotech.jpg",
+      image: "/encotech.webp",
       category: "company",
     },
     {
@@ -176,7 +176,7 @@ export const Projects: React.FC = () => {
       tech: ["React", "TypeScript", "Tailwind CSS", "Crisp API"],
       github: "",
       demo: "https://khambee.com/",
-      image: "/khambee.jpg",
+      image: "/khambee.webp",
       category: "company",
     },
     {
@@ -185,8 +185,18 @@ export const Projects: React.FC = () => {
       desc: "A premium travel and tourism booking platform featuring destination carousels, customizable tour packages, dynamic search filters, and an interactive reservation workflow.",
       tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/the-gold-technologies/kokalachi",
-      demo: "https://kokalachi.vercel.app/",
-      image: "/kokalachi.png",
+      demo: "https://kokalachi.com/",
+      image: "/kokalachi.webp",
+      category: "company",
+    },
+    {
+      title: "Kokalachi CMS",
+      subtitle: "The Gold Technologies",
+      desc: "A centralized content management and booking administration portal enabling tour curators to manage travel packages, itineraries, blogs, and guest reservations in real time.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL"],
+      github: "https://github.com/the-gold-technologies/cms-kokalachi",
+      demo: "https://cms.kokalachi.com/",
+      image: "/kokalachi-cms.webp",
       category: "company",
     },
     {
@@ -195,8 +205,8 @@ export const Projects: React.FC = () => {
       desc: "An enterprise industrial power solutions platform delivering Kirloskar-certified generators and turnkey power infrastructure across India with dynamic product catalogs and enquiry pipelines.",
       tech: ["React", "TypeScript", "Tailwind CSS", "GSAP", "Framer Motion"],
       github: "https://github.com/the-gold-technologies/kumarpower",
-      demo: "https://kumarpower.vercel.app/",
-      image: "/kumarpower.png",
+      demo: "https://www.kumarpower.com/",
+      image: "/kumarpower.webp",
       category: "company",
     },
     {
@@ -205,8 +215,38 @@ export const Projects: React.FC = () => {
       desc: "A robust content management dashboard with role-based authentication, product catalog administration, lead processing, and Cloudinary media management.",
       tech: ["Next.js", "TypeScript", "Prisma", "Tailwind CSS", "Cloudinary"],
       github: "https://github.com/the-gold-technologies/cms-kumarpower",
-      demo: "https://cms-kumarpower.tgtpartner.com/login",
-      image: "/kumarpower-cms.png",
+      demo: "https://cms.kumarpower.com/login",
+      image: "/kumarpower-cms.webp",
+      category: "company",
+    },
+    {
+      title: "Lubricon Specialities",
+      subtitle: "The Gold Technologies",
+      desc: "A high-performance industrial and automotive lubricants platform powered by Australian technology, featuring neat cutting fluids, industrial oils, bilingual support, and technical audit requests.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      github: "https://github.com/the-gold-technologies/Lubricon",
+      demo: "https://www.lubriconindia.com/",
+      image: "/lubricon.webp",
+      category: "company",
+    },
+    {
+      title: "HP Lubricants CFA",
+      subtitle: "The Gold Technologies",
+      desc: "An authorized distribution portal for HP Lubricants (Mahalaxmi Enterprises CFA) showcasing ultra-synthetic engine oils, industrial grease, distributor networks, and bulk enquiry pipelines.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      github: "https://github.com/the-gold-technologies/mahalaxmi-enterprises",
+      demo: "https://hplubricantscfa.com/",
+      image: "/hplubricants.webp",
+      category: "company",
+    },
+    {
+      title: "Jai Deva Oil Co.",
+      subtitle: "The Gold Technologies",
+      desc: "A multi-brand industrial and automotive lubricant distributor platform presenting certified products, lubrication selector tools, partner onboarding, and customer support channels.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      github: "https://github.com/the-gold-technologies/jaideva",
+      demo: "https://www.jaidevaoilco.com/",
+      image: "/jaideva.webp",
       category: "company",
     },
   ];
@@ -299,6 +339,9 @@ export const Projects: React.FC = () => {
             src={project.image}
             alt={project.title}
             loading="lazy"
+            decoding="async"
+            width={800}
+            height={450}
             style={{
               width: "100%",
               height: "100%",

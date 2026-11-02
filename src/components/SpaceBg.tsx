@@ -419,7 +419,7 @@ export const SpaceBg: React.FC = () => {
 
     // ── Layer 1: Scroll movement — clean scrubbed timelines ───────────
     // Planet 2 (ice, bottom-left): rises and drifts right
-    gsap.to(p2ScrollRef.current, {
+    const p2Scroll = gsap.to(p2ScrollRef.current, {
       x: 90,
       y: -130,
       ease: "none",
@@ -432,7 +432,7 @@ export const SpaceBg: React.FC = () => {
     });
 
     // Planet 3 (red, center-left): drifts right & down — smaller movement
-    gsap.to(p3ScrollRef.current, {
+    const p3Scroll = gsap.to(p3ScrollRef.current, {
       x: 55,
       y: 140,
       ease: "none",
@@ -469,7 +469,11 @@ export const SpaceBg: React.FC = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousemove", handlePlanetParallax);
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      // Only kill this component's triggers — not every section's animations
+      p2Scroll.scrollTrigger?.kill();
+      p3Scroll.scrollTrigger?.kill();
+      p2Scroll.kill();
+      p3Scroll.kill();
       [p2FloatRef, p3FloatRef].forEach(({ current }) => {
         if (current) gsap.killTweensOf(current);
       });

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 // Components
-import { SpaceBg } from "./components/SpaceBg";
 import { LightBg } from "./components/LightBg";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
@@ -17,19 +16,31 @@ import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
+// Dark-mode canvas background is only needed when dark theme is active
+const SpaceBg = lazy(() =>
+  import("./components/SpaceBg").then((m) => ({ default: m.SpaceBg })),
+);
+
 function App() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
 
   // Theme state lifted to App level
   const [theme, setTheme] = useState<"light" | "dark">(() => {
-    const saved = localStorage.getItem("theme");
-    return (saved as "light" | "dark") || "light";
+    try {
+      return localStorage.getItem("theme") === "dark" ? "dark" : "light";
+    } catch {
+      return "light";
+    }
   });
 
   useEffect(() => {
     // Write theme attributes to HTML
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      /* storage unavailable */
+    }
   }, [theme]);
 
   const toggleTheme = () => {
@@ -153,7 +164,11 @@ function App() {
       <div ref={cursorRef} className="custom-cursor" />
 
       {/* Deep Space Background – Dark Mode only */}
-      {theme === "dark" && <SpaceBg />}
+      {theme === "dark" && (
+        <Suspense fallback={null}>
+          <SpaceBg />
+        </Suspense>
+      )}
 
       {/* Light Mode Sun Background */}
       {theme === "light" && <LightBg />}

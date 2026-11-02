@@ -49,6 +49,8 @@ export const Skills: React.FC = () => {
       alt={slug}
       width={24}
       height={24}
+      loading="lazy"
+      decoding="async"
       style={{ display: "block" }}
     />
   );

@@ -48,7 +48,7 @@ export const About: React.FC = () => {
       desc: "Full Stack Development",
     },
     {
-      value: "15+",
+      value: "18+",
       label: "Projects Completed",
       desc: "Production Applications",
     },
@@ -88,8 +88,11 @@ export const About: React.FC = () => {
         >
           {/* Main 3D Avatar Image */}
           <img
-            src="/about_avatar_man.png"
+            src="/about_avatar_man.webp"
             alt="Sudeesh Kumar - About 3D Avatar"
+            width={440}
+            height={440}
+            decoding="async"
             loading="lazy"
             style={{
               width: "90%",

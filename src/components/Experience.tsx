@@ -53,7 +53,7 @@ export const Experience: React.FC = () => {
         "Developed a multi-tenant Inventory Management SaaS platform with RBAC, super admin controls, subscription management, trial onboarding, and billing automation.",
         "Developed real-time features including live Chat Support, Announcement broadcasting, and a System Log tracking user admin actions using Socket.io.",
         "Built Email Campaign management with Markdown processing, React Query, template image upload, automated scheduling, and Google OAuth integration.",
-        "Built and delivered CMS-driven websites (TGT, Seven Stars, Ownix, ARCOS, Encotech) with Cloudinary image management, SEO optimization, and live Instagram feed integration using Meta Graph & Instagram APIs in Next.js.",
+        "Built and delivered production platforms and bespoke CMS solutions (Kokalachi, Kumar Power, Lubricon Specialities, HP Lubricants CFA, Jai Deva Oil Co., SK Jewellers, ARCOS, Encotech, Seven Stars) with Cloudinary image management, SEO optimization, and live integrations in Next.js & React.",
       ],
     },
     {
@@ -284,8 +284,11 @@ export const Experience: React.FC = () => {
           <div className="sidebar-avatar-frame glass-panel">
             <div className="sidebar-avatar-glow" />
             <img
-              src="/hero_avatar_man.png"
+              src="/hero_avatar_man.webp"
               alt="Sudeesh Kumar - Developer 3D Avatar"
+              width={440}
+              height={440}
+              decoding="async"
               className="sidebar-avatar-img"
               loading="lazy"
             />
@@ -313,7 +316,7 @@ export const Experience: React.FC = () => {
                 <span className="stat-label">Tech Companies</span>
               </div>
               <div className="sidebar-stat-item">
-                <span className="stat-number">15+</span>
+                <span className="stat-number">18+</span>
                 <span className="stat-label">Projects Completed</span>
               </div>
             </div>

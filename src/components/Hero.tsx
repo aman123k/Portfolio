@@ -347,8 +347,11 @@ export const Hero: React.FC = () => {
       >
         {/* Main 3D Avatar Image */}
         <img
-          src="/hero_avatar_man.png"
+          src="/hero_avatar_man.webp"
           alt="Sudeesh Kumar - Developer 3D Avatar"
+          width={440}
+          height={440}
+          decoding="async"
           loading="eager"
           fetchPriority="high"
           style={{

@@ -4,16 +4,47 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sudeesh Kumar | Frontend Engineer Portfolio</title>
-    <meta name="description" content="Sudeesh Kumar is a Frontend Engineer specializing in building highly performant, responsive, and interactive web applications using React, Next.js, Remix, TypeScript, and GSAP." />
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Sudeesh Kumar | Full Stack Engineer Portfolio</title>
+    <meta name="description" content="Sudeesh Kumar is a Full Stack Engineer with 3+ years of experience building scalable SaaS applications, CMS platforms, and high-performance web apps using React, Next.js, Remix, Node.js, and TypeScript." />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Apply saved theme before first paint to avoid a light/dark flash -->
+    <script>
+      try {
+        document.documentElement.setAttribute(
+          "data-theme",
+          localStorage.getItem("theme") === "dark" ? "dark" : "light"
+        );
+      } catch (e) {}
+    </script>
+
+    <!-- Above-the-fold image: fetch early -->
+    <link rel="preload" as="image" href="/hero_avatar_man.webp" type="image/webp" fetchpriority="high" />
+
+    <!-- Fonts: only the weights in use, loaded without blocking render -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.simpleicons.org" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap"
+      />
+    </noscript>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
